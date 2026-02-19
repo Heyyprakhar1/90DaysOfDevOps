@@ -1,3 +1,0 @@
-Hello, This is intro file
-Hello, This is details file
-committing the files
