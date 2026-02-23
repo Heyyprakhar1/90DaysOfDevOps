@@ -1,0 +1,27 @@
+# STAGE -1 BASE-IMAGE
+
+FROM  heyyprakhar1/flask-image:latest
+
+# STAGE -2 WORKING DIRECTORY
+
+WORKDIR /app
+
+# STAGE-3 COPY THE CODES
+
+COPY . . 
+
+# EXECUTION OF COMMANDS DURING BUILD
+
+RUN apt-get update && apt-get install unzip
+
+# EXPOSING THE PORTS
+
+EXPOSE 5000
+
+# DEFAULT COMMANDS
+
+ENTRYPOINT ["echo"]
+
+#Depends on task(vice-versa)
+
+# CMD ["echo", "hello"]

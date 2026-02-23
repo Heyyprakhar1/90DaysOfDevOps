@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prakhar — Josh Batch-10 | TrainWithShubham</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --surface: #fff;
+      --border: #e2ddd6;
+      --text: #1a1814;
+      --muted: #8a8478;
+      --accent: #1a3a2a;
+      --accent2: #c8622a;
+      --accent3: #2a5c8a;
+      --tag-bg: #eae7e0;
+      --card-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,243,238,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 6vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 100px 6vw 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #5effa0;
+      animation: livepulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livepulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.4; transform:scale(0.7); }
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent2);
+    }
+
+    .hero .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-top: 18px;
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: var(--card-shadow);
+      animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .stat-icon {
+      font-size: 32px;
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.green { background: rgba(26,58,42,0.08); }
+    .stat-icon.orange { background: rgba(200,98,42,0.08); }
+    .stat-icon.blue { background: rgba(42,92,138,0.08); }
+
+    .stat-info .label { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+    .stat-info .value { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 900; color: var(--text); }
+    .stat-info .desc { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 6vw;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 6vw;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      gap: 20px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .section-title em { font-style: italic; color: var(--accent2); }
+
+    /* ── PHASE 1 TOPICS ── */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 26px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .topic-card.tc1::after { background: var(--accent); }
+    .topic-card.tc2::after { background: var(--accent2); }
+    .topic-card.tc3::after { background: var(--accent3); }
+    .topic-card.tc4::after { background: #7a4a9a; }
+    .topic-card.tc5::after { background: #2a7a6a; }
+    .topic-card.tc6::after { background: #c8622a; }
+
+    .topic-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+    .topic-card .t-icon { font-size: 30px; margin-bottom: 14px; }
+    .topic-card .t-name {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .topic-card .t-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .topic-card.featured {
+      grid-column: span 2;
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .topic-card.featured .t-name { color: #fff; }
+    .topic-card.featured .t-desc { color: rgba(255,255,255,0.65); }
+    .topic-card.featured::after { background: #5effa0; }
+
+    /* ── DOCKER PROJECT ── */
+    .docker-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    .docker-header {
+      background: var(--accent);
+      padding: 40px 44px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .docker-header .d-icon {
+      font-size: 48px;
+      background: rgba(255,255,255,0.1);
+      width: 80px; height: 80px;
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .docker-header h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .docker-header p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 4px; }
+
+    .docker-body {
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .docker-body h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .docker-body p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tech-tag {
+      background: var(--tag-bg);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+
+    .arch-diagram {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .arch-box {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .arch-box .arch-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+    .arch-arrow { color: var(--muted); font-size: 18px; flex-shrink: 0; }
+
+    /* ── SHELL SCRIPTS ── */
+    .scripts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .script-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s ease;
+    }
+
+    .script-card:hover { transform: translateY(-3px); }
+
+    .script-card.featured-script {
+      grid-column: span 2;
+      border-color: var(--accent2);
+    }
+
+    .script-card .s-header {
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .script-card .s-icon {
+      font-size: 22px;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--tag-bg);
+      flex-shrink: 0;
+    }
+
+    .script-card .s-title { font-weight: 600; font-size: 14px; color: var(--text); }
+    .script-card .s-file { font-size: 11px; color: var(--muted); font-family: monospace; margin-top: 2px; }
+
+    .script-card .s-body { padding: 18px 22px; }
+    .script-card .s-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    .cicd-flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .flow-step.fail { background: #c8622a; }
+    .flow-arrow { color: var(--muted); font-size: 14px; }
+
+    /* ── QUIZ / LEADERBOARD ── */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 24px;
+    }
+
+    .winner-card {
+      background: var(--accent);
+      border-radius: 20px;
+      padding: 36px 32px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 340px;
+    }
+
+    .winner-card .w-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .winner-card .w-trophy { font-size: 56px; margin-bottom: 16px; }
+    .winner-card .w-title { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 900; line-height: 1.1; }
+    .winner-card .w-title em { font-style: italic; color: #5effa0; }
+    .winner-card .w-score { margin-top: 20px; }
+    .winner-card .w-score .big { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 900; color: #5effa0; line-height: 1; }
+    .winner-card .w-score .small { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+    .leaderboard-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    .lb-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lb-row {
+      padding: 14px 24px;
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .lb-row:last-child { border-bottom: none; }
+    .lb-row:hover { background: var(--tag-bg); }
+    .lb-row.me { background: rgba(26,58,42,0.06); }
+
+    .lb-rank { font-family: 'Fraunces', serif; font-weight: 900; font-size: 16px; color: var(--muted); text-align: center; }
+    .lb-rank.gold { color: #c8a400; }
+    .lb-name { font-weight: 500; font-size: 14px; color: var(--text); }
+    .lb-name .you-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 100px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .lb-pts { font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; color: var(--text); }
+
+    .auto-hero-banner {
+      margin-top: 24px;
+      background: linear-gradient(135deg, #c8622a, #e8922a);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #fff;
+    }
+
+    .auto-hero-banner .ah-icon { font-size: 36px; flex-shrink: 0; }
+    .auto-hero-banner h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+    .auto-hero-banner p { font-size: 13px; opacity: 0.8; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 6vw;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .f-left { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; color: var(--text); }
+    footer .f-right { font-size: 12px; color: var(--muted); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 5vw 50px; }
+      .topics-grid { grid-template-columns: 1fr 1fr; }
+      .topic-card.featured { grid-column: span 2; }
+      .docker-body { grid-template-columns: 1fr; }
+      .scripts-grid { grid-template-columns: 1fr; }
+      .script-card.featured-script { grid-column: span 1; }
+      .quiz-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Prakhar.</div>
+    <div class="nav-links">
+      <a href="#phase1">Phase 1</a>
+      <a href="#docker">Docker</a>
+      <a href="#shell">Shell Scripts</a>
+      <a href="#quiz">Quiz & Awards</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="live-dot"></span>
+        Phase 1 Complete · Josh Batch-10
+      </div>
+      <h1>Building<br>for the<br><em>real world.</em></h1>
+      <p class="hero-sub">
+        A record of my journey through Phase 1 of Josh Batch-10 at TrainWithShubham — from Linux fundamentals to advanced Docker pipelines and CI/CD automation.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-icon green">🏆</div>
+        <div class="stat-info">
+          <div class="label">Quiz Result</div>
+          <div class="value">#1 Winner</div>
+          <div class="desc">Docker Advanced · 12,104 pts · Fastest</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">🤖</div>
+        <div class="stat-info">
+          <div class="label">Special Title</div>
+          <div class="value">Automation Hero</div>
+          <div class="desc">Alongside Nandan · TrainWithShubham</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue">📚</div>
+        <div class="stat-info">
+          <div class="label">Phase 1 Modules</div>
+          <div class="value">6 Topics</div>
+          <div class="desc">Linux → Networking → Shell → Git → Docker</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- PHASE 1 TOPICS -->
+  <section id="phase1">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">Curriculum</div>
+        <div class="section-title">Phase 1 —<br><em>Topics Covered</em></div>
+      </div>
+    </div>
+
+    <div class="topics-grid reveal">
+      <div class="topic-card featured tc1">
+        <div class="t-icon">🐳</div>
+        <div class="t-name">Docker</div>
+        <div class="t-desc">Basics to Advanced — multi-stage builds, Docker Compose, and containerizing a 3-tier AI chatbot banking app. The capstone of Phase 1.</div>
+      </div>
+      <div class="topic-card tc3">
+        <div class="t-icon">🖥️</div>
+        <div class="t-name">Shell Scripting</div>
+        <div class="t-desc">Log rotation, backups, zip archiving, and a full CI/CD automation script using GitHub CLI.</div>
+      </div>
+
+      <div class="topic-card tc1">
+        <div class="t-icon">🐧</div>
+        <div class="t-name">Linux</div>
+        <div class="t-desc">File system, permissions, process management, and command-line proficiency.</div>
+      </div>
+      <div class="topic-card tc2">
+        <div class="t-icon">🌐</div>
+        <div class="t-name">Networking</div>
+        <div class="t-desc">TCP/IP, DNS, subnetting, ports, and how cloud infrastructure communicates.</div>
+      </div>
+      <div class="topic-card tc4">
+        <div class="t-icon">🔀</div>
+        <div class="t-name">Git & GitHub</div>
+        <div class="t-desc">Version control, branching strategies, pull requests, and collaborative workflows.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- DOCKER PROJECT -->
+  <section id="docker">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">Project Spotlight</div>
+        <div class="section-title">Docker —<br><em>Advanced Builds</em></div>
+      </div>
+    </div>
+
+    <div class="docker-section reveal">
+      <div class="docker-header">
+        <div class="d-icon">🐳</div>
+        <div>
+          <h3>AI Chatbot-Enabled Banking App</h3>
+          <p>3-Tier Architecture · Fully Containerized · Docker Compose Orchestrated</p>
+        </div>
+      </div>
+      <div class="docker-body">
+        <div>
+          <h4>Project Overview</h4>
+          <p>Built a fully containerized 3-tier banking application with an AI chatbot integration. The project brought together multi-stage Docker builds for lean production images and Docker Compose for orchestrating all services together seamlessly.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">🐳 Docker</span>
+            <span class="tech-tag">🧩 Docker Compose</span>
+            <span class="tech-tag">⚡ Multi-Stage Builds</span>
+            <span class="tech-tag">🤖 AI Chatbot</span>
+            <span class="tech-tag">🏦 Banking App</span>
+          </div>
+        </div>
+        <div>
+          <h4>3-Tier Architecture</h4>
+          <p>Each layer of the app is independently containerized, communicating via a Docker network — clean separation of concerns, production-ready structure.</p>
+          <div class="arch-diagram">
+            <div class="arch-box"><span class="arch-icon">🖥️</span>Frontend</div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-box"><span class="arch-icon">⚙️</span>Backend</div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-box"><span class="arch-icon">🗄️</span>Database</div>
+          </div>
+          <div style="margin-top:16px;">
+            <h4>Key Concepts Mastered</h4>
+            <p style="margin-top:8px;">Multi-stage builds to minimize image size · Docker Compose for multi-container orchestration · Container networking · Volume management · Environment variable handling</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- SHELL SCRIPTS -->
+  <section id="shell">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">Automation</div>
+        <div class="section-title">Shell Scripts —<br><em>Real-World Workflows</em></div>
+      </div>
+    </div>
+
+    <div class="scripts-grid reveal">
+
+      <!-- CI/CD Script - Featured -->
+      <div class="script-card featured-script">
+        <div class="s-header">
+          <div class="s-icon">⚡</div>
+          <div>
+            <div class="s-title">End-to-End CI/CD Automation via GitHub CLI</div>
+            <div class="s-file">cicd_automation.sh</div>
+          </div>
+        </div>
+        <div class="s-body">
+          <div class="s-desc">
+            A single bash script that simulates a complete real-world CI/CD pipeline using the GitHub CLI. It creates a repository, pushes code, opens a pull request, polls for CI check results, and takes action automatically — merging on success or raising an issue on failure. No manual intervention required.
+          </div>
+          <div class="cicd-flow">
+            <div class="flow-step">📁 Create Repo</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">⬆️ Push Code</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">🔀 Open PR</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">⏳ Wait for CI</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">✅ Auto-Merge</div>
+            <div class="flow-arrow">/</div>
+            <div class="flow-step fail">🚨 Raise Issue</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Log Rotation -->
+      <div class="script-card">
+        <div class="s-header">
+          <div class="s-icon">🔄</div>
+          <div>
+            <div class="s-title">Log Rotation Script</div>
+            <div class="s-file">log_rotation.sh</div>
+          </div>
+        </div>
+        <div class="s-body">
+          <div class="s-desc">Automatically rotates logs by size or age, archiving old log files to keep directories clean and prevent disk bloat on production systems.</div>
+        </div>
+      </div>
+
+      <!-- Backup Script -->
+      <div class="script-card">
+        <div class="s-header">
+          <div class="s-icon">💾</div>
+          <div>
+            <div class="s-title">Backup Automation Script</div>
+            <div class="s-file">backup.sh</div>
+          </div>
+        </div>
+        <div class="s-body">
+          <div class="s-desc">Scheduled backup script that copies critical files and directories to a safe location, compresses them into zip archives for storage efficiency.</div>
+        </div>
+      </div>
+
+      <!-- Log Cleaner -->
+      <div class="script-card">
+        <div class="s-header">
+          <div class="s-icon">🧹</div>
+          <div>
+            <div class="s-title">Old Log Cleanup + Zip Archiver</div>
+            <div class="s-file">cleanup_logs.sh</div>
+          </div>
+        </div>
+        <div class="s-body">
+          <div class="s-desc">Scans for logs older than a defined threshold, cleans them from the active directory, and converts them into compressed zip files for long-term archival.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- QUIZ & AWARDS -->
+  <section id="quiz">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">Recognition</div>
+        <div class="section-title">Quiz Win &<br><em>Awards</em></div>
+      </div>
+    </div>
+
+    <div class="quiz-grid reveal">
+      <div class="winner-card">
+        <div>
+          <div class="w-label">Docker Advanced Quiz · Phase 1 Final</div>
+          <div class="w-trophy">🏆</div>
+          <div class="w-title"><em>#1</em><br>Quiz<br>Champion</div>
+        </div>
+        <div class="w-score">
+          <div class="big">12,104</div>
+          <div class="small">Points · Fastest Finisher in Batch</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="leaderboard-card">
+          <div class="lb-header">📊 Final Leaderboard — Top 10</div>
+          <div class="lb-row me">
+            <div class="lb-rank gold">1</div>
+            <div class="lb-name">Prakhar <span class="you-badge">You</span></div>
+            <div class="lb-pts">12,104p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">2</div>
+            <div class="lb-name">Shubham Chaurasia</div>
+            <div class="lb-pts">11,437p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">3</div>
+            <div class="lb-name">Yatin Gambhir</div>
+            <div class="lb-pts">10,802p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">4</div>
+            <div class="lb-name">Renu</div>
+            <div class="lb-pts">10,248p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">5</div>
+            <div class="lb-name">Sanket Dangat</div>
+            <div class="lb-pts">9,942p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">6</div>
+            <div class="lb-name">Nandan</div>
+            <div class="lb-pts">9,890p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">7</div>
+            <div class="lb-name">Shubham Suryawanshi</div>
+            <div class="lb-pts">9,716p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">8</div>
+            <div class="lb-name">Siva</div>
+            <div class="lb-pts">9,635p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">9</div>
+            <div class="lb-name">Shuvradeep Datta</div>
+            <div class="lb-pts">9,609p</div>
+          </div>
+          <div class="lb-row">
+            <div class="lb-rank">10</div>
+            <div class="lb-name">Shivanshu</div>
+            <div class="lb-pts">9,532p</div>
+          </div>
+        </div>
+
+        <div class="auto-hero-banner">
+          <div class="ah-icon">🤖</div>
+          <div>
+            <h4>Automation Hero</h4>
+            <p>Awarded for outstanding shell scripting & CI/CD automation. Shared with fellow hero Nandan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <hr class="section-divider"/>
+  <footer>
+    <div class="f-left">Prakhar · Josh Batch-10</div>
+    <div class="f-right">TrainWithShubham · Phase 1 Complete ✓</div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
