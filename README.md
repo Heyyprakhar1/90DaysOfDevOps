@@ -1,71 +1,80 @@
-# 🌟 My 90DaysOfDevOps Journey (2026)
+# 🎯 90 Days of DevOps — My Daily Assignment Journey (2026)
 
-This repository is my fork of the original #90DaysOfDevOps challenge by TrainWithShubham.
+Welcome to my **DevOps learning journey** — a hands-on commitment to mastering practical DevOps skills one day at a time.
 
-I am documenting my hands-on learning daily with command outputs, explanations, and real troubleshooting observations.
-
----
-
-## 🔥 Current Progress
-
-**Completed:** Day 01 – Day 17  
-**In Progress:** Shell Scripting  
-**Focus Areas Covered So Far:**
-- Linux Fundamentals
-- File Permissions & Ownership
-- User & Group Management
-- Networking Basics (DNS, IP, Subnetting, Ports)
-- Troubleshooting Commands
-- Git & GitHub Workflows
+This fork (on the `daily-assignment` branch) tracks my **daily assignments**, command outputs, explanations, and real troubleshooting learnings as I progress through the challenge. :contentReference[oaicite:1]{index=1}
 
 ---
 
-## 📅 2026 Progress Tracker
+## 📍 Current Progress (Updated)
 
-### 🐧 Linux Fundamentals
-- Day 01 – Introduction & Setup
-- Day 02 – Basic Linux Commands
-- Day 03 – File System & Navigation
-- Day 04 – File Operations
-- Day 05 – Text Processing
-- Day 06 – Process Management
-- Day 07 – Package Management
-- Day 08 – Permissions Deep Dive
-- Day 09 – User Management
-- Day 10 – File Permissions
-- Day 11 – File Ownership
-- Day 12 – Advanced Linux Concepts
-- Day 13 – Linux Practice & Troubleshooting
+**✅ Completed:**  
+**Day 01 – Day 17** — completed with documented commands and explanations. :contentReference[oaicite:2]{index=2}
+
+**🛠 In Progress:**  
+✅ Shell Scripting fundamentals (variables, conditions, loops — underway). :contentReference[oaicite:3]{index=3}
+
+---
+
+## 📌 Focus Areas Covered So Far
+
+| Area | Status |
+|------|--------|
+| Linux Fundamentals | ✅ Completed |
+| File Permissions & Ownership | ✅ Completed |
+| User & Group Management | ✅ Completed |
+| Networking Basics (DNS, IP, Subnetting, Ports) | ✅ Completed |
+| Troubleshooting Commands | ✅ Completed |
+| Git & GitHub Workflows | ✅ Covered |
+| Shell Scripting | 🔄 In Progress |
+
+*More topics (e.g., Docker, CI/CD, Kubernetes, Cloud, Terraform, Observability) will be added as I progress.*
+
+---
+
+## 🗓 2026 Progress Tracker
+
+### 📂 Linux Fundamentals
+- Day 01 – Introduction & Setup  
+- Day 02 – Basic Linux Commands  
+- Day 03 – File System & Navigation  
+- Day 04 – File Operations  
+- Day 05 – Text Processing  
+- Day 06 – Process Management  
+- Day 07 – Package Management  
+- Day 08 – Permissions Deep Dive  
+- Day 09 – User Management  
+- Day 10 – File Permissions  
+- Day 11 – File Ownership  
+- Day 12 – Advanced Linux Concepts  
+- Day 13 – Linux Practice & Troubleshooting  
 
 ### 🌐 Networking
-- Day 14 – Networking Fundamentals
-- Day 15 – DNS, IP, Subnets & Ports
-- Day 16 – Networking Commands Practice
-- Day 17 – Connectivity & Port Checks
+- Day 14 – Networking Fundamentals  
+- Day 15 – DNS, IP, Subnets & Ports  
+- Day 16 – Networking Commands Practice  
+- Day 17 – Connectivity & Port Checks  
 
-### 🧠 Shell Scripting (WIP)
-- Basic scripting structure
-- Variables & arguments
-- Conditional statements
-- Loops (in progress)
+### 🐚 Shell Scripting (Work In Progress)
+- Basic scripting structure  
+- Variables & arguments  
+- Conditional statements  
+- Loops  
+- Script automation examples  
 
 ---
 
 ## 📌 What This Repository Shows
 
-- Consistent daily practice
-- Command-level understanding
-- Real output documentation
-- Clean Git history
-- Structured DevOps learning path
+This repository isn’t just notes — it’s **proof of consistent work**:
 
-> This is not just notes — this is proof of work.
+✔ Daily hands-on practice  
+✔ Real command outputs  
+✔ Troubleshooting learnings  
+✔ Version-controlled progress  
+✔ Structured DevOps learning path
 
 ---
-
-
-
-
 
 
 
