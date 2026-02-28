@@ -2,44 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Prakhar | DevOps Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>90DaysOfDevOps Python App</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
-        header { margin-bottom: 30px; }
-        h1 { color: #2c3e50; }
-        p { font-size: 1.1rem; color: #34495e; }
+
+        body {
+            background: #0f172a;
+            color: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #38bdf8;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #cbd5e1;
+        }
+
         .btn {
             display: inline-block;
-            background: #2980b9;
-            color: white;
-            padding: 10px 18px;
-            text-decoration: none;
-            border-radius: 4px;
             margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: bold;
+            transition: 0.3s;
         }
-        .btn:hover { background: #1b6691; }
+
+        .btn:hover {
+            background: #0ea5e9;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #38bdf8;
+            text-align: center;
+        }
+
+        .skills, .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: #334155;
+        }
+
+        /* Clickable Project Cards */
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-link .card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-link .card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #020617;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Welcome to 90DaysOfDevOps Python App</h1>
-        <p>This simple Flask application serves this HTML page.</p>
+        <h1>Prakhar</h1>
+        <p> DevOps Engineer | 90 Days of DevOps Challenge</p>
+        <a href="https://github.com/Heyyprakhar1" class="btn" target="_blank">
+            View My GitHub
+        </a>
     </header>
 
-    <main>
-        <p>This repository is a part of the DevOps challenge — now with a Python + Docker example!</p>
-        <a class="btn" href="/api/hello">Say Hello (API)</a>
-    </main>
+    <section>
+        <h2>🛠 Skills</h2>
+        <div class="skills">
+            <div class="card">Linux</div>
+            <div class="card">Docker</div>
+            <div class="card">AWS</div>
+            <div class="card">Jenkins</div>
+            <div class="card">Shell Scripting</div>
+            <div class="card">Git & GitHub</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>🚀 Projects</h2>
+        <div class="projects">
+
+            <a href="https://github.com/Heyyprakhar1/90DaysOfDevOps" target="_blank" class="project-link">
+                <div class="card">
+                    <h3>90 Days of DevOps</h3>
+                    <p>Hands-on DevOps learning challenge covering Linux, Docker, AWS & CI/CD.</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/Heyyprakhar1/two-tier-app/" target="_blank" class="project-link">
+                <div class="card">
+                    <h3>Flask + Docker App</h3>
+                    <p>Multi-stage build using Distroless image for secure production deployment.</p>
+                </div>
+            </a>
+
+            
+        </div>
+    </section>
+
+    <section style="text-align:center;">
+        <h2>📡 Test Backend API</h2>
+        <a href="/api/hello" class="btn">Call /api/hello</a>
+    </section>
 
     <footer>
-        <p>&copy; 2026 90DaysOfDevOps — Powered by @TrainWithShubham </p>
+        © 2026 Prakhar | Built with Python, Flask & Docker
     </footer>
+
 </body>
 </html>
