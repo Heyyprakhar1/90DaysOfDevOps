@@ -1,0 +1,26 @@
+# Demo is the workflow name
+name: demo
+on: 
+  push: 
+    branches: [master]
+jobs:
+# code is the name of the job
+  code:
+    runs-on: ubuntu-latest
+    steps:
+        - name: code-build
+          run: echo " Code build."
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker build
+        run: echo "Docker build successfully."
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: testing the code
+        run: echo "testing done."
+    
+    
