@@ -1,17 +1,26 @@
 import os
+import time
 import pymysql
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
 def get_db_connection():
-    return pymysql.connect(
-        host=os.getenv("MYSQL_HOST", "mysql"),
-        user=os.getenv("MYSQL_USER", "mysql"),
-        password=os.getenv("MYSQL_PASSWORD", "root"),
-        database=os.getenv("MYSQL_DB", "mydb"),
-        cursorclass=pymysql.cursors.DictCursor
-    )
+    while True:
+        try:
+            connection = pymysql.connect(
+                host=os.getenv("MYSQL_HOST", "mysql"),
+                user=os.getenv("MYSQL_USER", "mysql"),
+                password=os.getenv("MYSQL_PASSWORD", "root"),
+                database=os.getenv("MYSQL_DB", "mydb"),
+                cursorclass=pymysql.cursors.DictCursor
+            )
+            print("✅ Connected to MySQL!")
+            return connection
+        except pymysql.err.OperationalError:
+            print("⏳ MySQL not ready, retrying in 5 seconds...")
+            time.sleep(5)
+
 
 def init_db():
     connection = get_db_connection()
