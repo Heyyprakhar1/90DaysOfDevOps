@@ -1,7 +1,6 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysqlcontainer
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: mysql
@@ -16,15 +15,14 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 5s
       timeout: 5s
-      retries: 5 
+      retries: 5
 
   flask:
     build:
       context: .
-    container_name: flask-container
     networks:
       - mydb-net
-    depends_on: 
+    depends_on:
       mysql:
         condition: service_healthy
     restart: always
@@ -36,8 +34,7 @@ services:
       MYSQL_DB: mydb
       MYSQL_PASSWORD: root
 
-volumes:
-  mysql-db:
-
 networks:
   mydb-net:
+volumes:
+  mysql-db:
