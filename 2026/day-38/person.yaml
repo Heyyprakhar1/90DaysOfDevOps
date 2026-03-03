@@ -1,0 +1,12 @@
+name: Prakhar
+role: DevOps Engineer
+experience_years: 1
+learning: True #Boolean
+tools:
+  - Linux
+  - Docker
+  - Shell Scripting
+  - Git
+  - GitHub Actions
+
+hobbies: ["Automation", "cricket", "music"]

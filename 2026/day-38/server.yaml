@@ -1,0 +1,23 @@
+server:
+  name: MyServer
+  IP: "127.0.0.1"
+  Port: 80
+
+database:
+  host: localhost
+  name: local_db
+  credentials:
+    user: admin
+    password: password123
+
+startup_script: |
+  #!/bin/bash
+  echo "Starting server..."
+  systemctl status nginx
+  # Add your startup commands here
+
+start_script: >
+  #!/bin/bash
+  echo "Starting server..."
+  systemctl status nginx
+  # Add your startup commands here
