@@ -1,5 +1,7 @@
 name: first_workflow
-on: push
+on: 
+  push:
+    branches: [daily-assignment]
 jobs:
   greet:
     runs-on: ubuntu-latest
