@@ -8,3 +8,8 @@ jobs:
     steps:
       - name: hello
         run: echo "Hello World"
+  code-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code-build
+        run: echo "code is building"
