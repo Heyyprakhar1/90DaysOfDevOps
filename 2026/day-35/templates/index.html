@@ -5,7 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Prakhar Srivastava | Cloud & DevOps Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet"/>
+<style>
+  /* Fallback fonts in case Google Fonts fails to load */
+  @import url('data:text/css,');
+  :root {
+    --mono: 'Share Tech Mono', 'Courier New', 'Lucida Console', monospace;
+    --display: 'Orbitron', 'Courier New', monospace;
+    --body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+</style>
 <style>
   :root {
     --cyan:   #00f0ff;
@@ -30,7 +40,10 @@
     color: var(--text);
     font-family: var(--body);
     overflow-x: hidden;
-    cursor: none;
+  }
+
+  @media (pointer: fine) {
+    body { cursor: auto; }
   }
 
   /* ── CUSTOM CURSOR ── */
@@ -108,6 +121,7 @@
     min-height:100vh; display:flex; align-items:center;
     padding: 7rem 3rem 4rem;
     position:relative; overflow:hidden;
+    width:100%;
   }
 
   .hero-grid {
@@ -189,12 +203,13 @@
 
   .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
 
-  .btn-primary {
+  .btn-primary, .btn-ghost, .form-submit { cursor: pointer; }
+  .nav-links a, .contact-link, .project-link, .achievement-link { cursor: pointer; }
     font-family: var(--mono); font-size:.75rem; letter-spacing:.15em;
     padding:.75rem 1.75rem;
     background: transparent;
     border: 1px solid var(--cyan); color: var(--cyan);
-    text-decoration:none; cursor:none;
+    text-decoration:none; cursor:pointer;
     position:relative; overflow:hidden;
     transition: color .3s;
   }
@@ -212,7 +227,7 @@
     padding:.75rem 1.75rem;
     background: transparent;
     border: 1px solid var(--border); color: var(--text);
-    text-decoration:none; cursor:none;
+    text-decoration:none; cursor:pointer;
     transition: border-color .3s, color .3s;
   }
   .btn-ghost:hover { border-color: var(--cyan); color: var(--white); }
@@ -495,7 +510,7 @@
   .form-submit {
     font-family:var(--mono); font-size:.75rem; letter-spacing:.2em;
     padding:.9rem 2rem; border:1px solid var(--cyan);
-    background:transparent; color:var(--cyan); cursor:none;
+    background:transparent; color:var(--cyan); cursor:pointer;
     position:relative; overflow:hidden;
     transition: color .3s; align-self:flex-start;
   }
@@ -529,10 +544,15 @@
 
   /* ── ANIMATIONS ── */
   .reveal {
-    opacity:0; transform:translateY(24px);
+    opacity:1; transform:translateY(0);
     transition: opacity .7s ease, transform .7s ease;
   }
-  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal.animate {
+    opacity:0; transform:translateY(24px);
+  }
+  .reveal.animate.visible { opacity:1; transform:translateY(0); }
+  .hero-content { opacity:1 !important; transform:none !important; }
+  .hero-stats-wrap { opacity:1 !important; transform:none !important; }
 
   /* ── RESPONSIVE ── */
   @media(max-width:768px){
@@ -548,10 +568,6 @@
 </style>
 </head>
 <body>
-
-<!-- Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-trail" id="cursorTrail"></div>
 
 <!-- Scroll progress -->
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -592,7 +608,7 @@
         <a href="https://www.linkedin.com/in/heyyprakhar1/" class="btn-ghost" target="_blank">LINKEDIN ↗</a>
       </div>
     </div>
-    <div class="hero-stats reveal">
+    <div class="hero-stats hero-stats-wrap">
       <div class="stat">
         <div class="stat-num">2+</div>
         <div class="stat-label">YEARS EXP.</div>
@@ -804,7 +820,7 @@
     <div class="journey-item">
       <div class="journey-date">CORE BELIEF</div>
       <div>
-        <div class="journey-title" style="color:var(--cyan)">Consistency > Motivation. Execution > Excuses.</div>
+        <div class="journey-title" style="color:var(--cyan)">Consistency > Motivation. Execution > Exces.</div>
         <p class="journey-body">Every outage is a free architecture review. Automate the boring. Build the extraordinary.</p>
       </div>
     </div>
@@ -818,7 +834,7 @@
     <h2 class="section-title reveal">Let's build something.</h2>
     <div class="contact-grid reveal">
       <div>
-        <p style="font-size:.95rem;color:var(--text);line-height:1.8;margin-bottom:2rem;">
+        <p style="font-size:.95rem;color:var(--text);line-height:1.8;margin-bottom:2rem;
           Open to DevOps roles, cloud infrastructure consulting, and open-source collaboration.
           If you're building something that needs to scale, stay up, and stay secure — let's talk.
         </p>
@@ -826,11 +842,11 @@
           <a href="https://www.linkedin.com/in/heyyprakhar1/" target="_blank" class="contact-link">
             <span class="contact-link-icon">in</span> linkedin.com/in/heyyprakhar1
           </a>
-          <a href="https://github.com/Heyyprakhar1" target="_blank" class="contact-link">
+          <a href="https://github.com/Heyyprakhar1" target="_blank"lass="contact-link">
             <span class="contact-link-icon">gh</span> github.com/Heyyprakhar1
           </a>
-          <a href="mailto:srivprak0106@gmail.com" class="contact-link">
-            <span class="contact-link-icon">@</span> srivprak0106@gmail.com
+          <a href="/cdn-cgi/l/email-protection#31424358474143505a0100010771565c50585d1f525e5c" class="contact-link">
+            <span class="contact-link-icon">@</span> <span class="__cf_email__" data-cfemail="0477766d727476656f34353432446369656d682a676b69">[email&#160;protected]</span>
           </a>
         </div>
       </div>
@@ -859,20 +875,8 @@
   <div class="footer-text">AUTOMATE EVERYTHING · <span>SECURE BY DESIGN</span> · DEPLOY WITH CONFIDENCE</div>
 </footer>
 
-<script>
-  // ── Cursor ──
-  const cursor = document.getElementById('cursor');
-  const trail  = document.getElementById('cursorTrail');
-  document.addEventListener('mousemove',sor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    setTimeout(()=>{ trail.style.left = e.clientX+'px'; trail.style.top = e.clientY+'px'; }, 80);
-  });
-  document.querySelectorAll('a,button,.stat,.skill-cat,.project-card,.cert-card').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2)');
-    el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
-  });
-
-  // ── Scroll pess ──
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-min.js"></script><script>
+  // ── Scroll progress ──
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
     document.getElementById('scrollProgress').style.width = pct + '%';
@@ -880,19 +884,27 @@
 
   // ── Reveal on scroll ──
   const observer = new IntersectionObserver(entries => {
-    entries.forEach((e,i) => {
+    entries.forEach((e, i) => {
       if(e.isIntersecting){
-        setTimeout(()=> e.target.classList.add('visible'), i * 80);
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
       }
     });
-  }, { threshold:.1 });
-  document.querySelectorAll('rEach(el => observer.observe(el));
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+    // Immediately show elements already in viewport on load
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight) {
+      setTimeout(() => el.classList.add('visible'), 100);
+    }
+  });
 
   // ── Typing effect ──
   const lines = [
     'Currently on #90DaysOfDevOps',
     'Specializing in AWS 3-Tier Architectures',
-    'Automating deployments with Terraform',
+    'Automating dep with Terraform',
     'Containerizing apps with Docker + K8s',
     'Building CI/CD pipelines that actually work',
   ];
@@ -900,7 +912,7 @@
   const el = document.getElementById('typingText');
   function type(){
     const line = lines[li];
-    if(!deleting){ el.textContent = line.slice(0,++ci); if(ci=ength){ deleting=true; setTimeout(type,1800); return; } }
+    if(!deleting){ el.textContent = line.slice(0,++ci); if(ci===line.length){ deleting=true; setTimeout(type,1800); return; } }
     else { el.textContent = line.slice(0,--ci); if(ci===0){ deleting=false; li=(li+1)%lines.length; } }
     setTimeout(type, deleting ? 40 : 80);
   }
@@ -910,11 +922,4 @@
   function handleSubmit(e){
     e.preventDefault();
     const btn = e.target.querySelector('.form-submit');
-    btn.textContent = 'MESSAGE SENT ✓';
-    btn.style.background = 'var(--cyan)';
-    btn.style.color = 'var(--bg)';
-    setTimeout(()=>{ btn.textContent='SEND'; btn.style.background=''; btn.style.color=''; e.target.reset(); },3000);
-  }
-</script>
-</body>
-</html>
+    btn.textContent = 'MESSAG
