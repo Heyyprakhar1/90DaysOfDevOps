@@ -5,6 +5,7 @@ on:
         paths:
             - "**.html"
 permissions:
+    contents: read # to read the repository content
     pages: write # to deploy to GitHub Pages
     id-token: write # to authenticate with GitHub Pages
 jobs:
@@ -20,9 +21,9 @@ jobs:
             - name: Setup GitHub Pages
               uses: actions/configure-pages@v4
             - name: Upload static files
+              uses: actions/upload-pages-artifact@v4
               with:
                   path: .
-              uses: actions/upload-pages-artifact@v4
             - name: Deploy to GitHub Pages
               id: deploy-pages
               uses: actions/deploy-pages@v4
