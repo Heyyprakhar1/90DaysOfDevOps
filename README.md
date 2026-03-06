@@ -1,209 +1,142 @@
-# 🎯 90 Days of DevOps — My Daily Assignment Journey (2026)
+# 🚀 #90DaysOfDevOps Journey
 
-Welcome to my **90 Days of DevOps** hands-on journey.
+Hi, I'm **Prakhar** — a DevOps & Cloud enthusiast learning by **building real systems and documenting the process publicly**.
 
-This repository tracks my daily assignments, practical exercises, command outputs, troubleshooting notes, and real implementations as I progress step by step toward mastering DevOps.
-
----
-
-## 📊 Current Progress
-
-✅ **Completed: Day 01 – Day 31**
-
-This includes:
-
-- Linux Fundamentals
-- User & Permission Management
-- Networking Basics
-- Shell Scripting
-- Git & GitHub Workflow
-- Introduction to Docker
-- Docker Images & Container Lifecycle
-
-Consistency > Motivation. 31 days strong.
+This repository tracks my **#90DaysOfDevOps challenge**, where I practice tools used in modern infrastructure and deployment pipelines.
 
 ---
 
-## 🧠 Topics Covered So Far
+# 🎯 Goal
 
-### 🐧 Linux Fundamentals
-- File system navigation
-- File operations
-- Text processing
-- Package management
-- Process management
-- System monitoring
-- Advanced Linux concepts
-- Troubleshooting scenarios
+To gain **practical DevOps skills** by working with:
 
-### 👥 User & Permission Management
-- Users & groups
-- File ownership
-- chmod, chown, chgrp
-- Permission deep dive
+* Linux
+* Networking fundamentals
+* Docker & Containerization
+* Git & GitHub
+* CI/CD pipelines
+* Cloud infrastructure
+
+Every day includes **hands-on tasks, notes, and screenshots**.
+
+---
+
+# 📅 Progress Tracker
+
+| Day       | Topic               | Description                                 |
+| --------- | ------------------- | ------------------------------------------- |
+| Day 1–7   | Linux Basics        | File system, permissions, shell commands    |
+| Day 8–14  | Linux Advanced      | Process management, networking basics       |
+| Day 15–20 | Git & GitHub        | Version control, branching, workflows       |
+| Day 21–28 | Networking          | OSI model, ports, IP addressing, CIDR       |
+| Day 29    | Docker Introduction | Installing Docker, running containers       |
+| Day 30    | Docker Images       | Pulling images, understanding layers        |
+| Day 31    | Docker Containers   | Running and managing containers             |
+| Day 32    | Dockerfile Basics   | Building custom images                      |
+| Day 33    | Docker Networking   | Container communication                     |
+| Day 34    | Docker Volumes      | Persistent data management                  |
+| Day 35    | Docker Project      | Flask application containerization          |
+| Day 36    | Docker Compose      | Multi-container app (Flask + Redis + MySQL) |
+| Day 37    | Docker Revision     | Docker cheatsheet + self-assessment         |
+| Day 38    | Docker Optimization | Lightweight images & non-root containers    |
+| Day 39    | Docker Security     | Best practices & container hardening        |
+| Day 40    | GitHub Actions      | First CI workflow with automated pipeline   |
+| Day 41    | CI/CD Practice      | Workflow improvements & automation practice |
+
+---
+
+# 🧠 Key Things Learned So Far
+
+### 🐧 Linux
+
+* Core command line usage
+* File permissions and process management
+* Basic system troubleshooting
 
 ### 🌐 Networking
-- IP addressing
-- Subnet basics
-- DNS concepts
-- Ports & protocols
-- Networking commands (ping, netstat, curl, etc.)
-- Connectivity troubleshooting
 
-### 🐚 Shell Scripting
-- Script structure
-- Variables
-- User input
-- Conditional statements
-- Loops
-- Basic automation scripts
+* OSI model understanding
+* Port numbers & protocols
+* Subnetting and CIDR
 
-### 🔧 Git & GitHub
-- Repository management
-- Branching strategies
-- Commits & PR workflow
-- CLI usage
-- Automation basics
+### 🐳 Docker
 
-### 🐳 Docker (Up to Day 31)
-- Docker architecture
-- Images vs Containers
-- Image layers & caching
-- Pulling official images
-- Running containers
-- Container lifecycle
-- Basic Dockerfile understanding
+* Building images using Dockerfile
+* Running and managing containers
+* Docker networking & volumes
+* Multi-container applications using Docker Compose
+
+### ⚙️ CI/CD
+
+* Creating GitHub Actions workflows
+* Understanding pipeline automation
+* Running automated builds on push
 
 ---
 
-
-# 🚀 90DaysOfDevOps
-### Learn • Build • Practice • Become Job-Ready
-
-Welcome to **90DaysOfDevOps**, a structured and hands-on DevOps challenge by **TrainWithShubham**.
-
-This repository is designed to help you **build real DevOps skills step by step in 90 days** — not by watching endless videos, but by **doing daily tasks**, building projects, and thinking like a **production-ready DevOps engineer**.
-
-This is not a theory-heavy course.  
-This is a **discipline + execution challenge**.
-
----
-
-## 🎯 What is #90DaysOfDevOps?
-
-**#90DaysOfDevOps** is a **day-wise DevOps learning challenge** where:
-
-- Every day has **one clear task**
-- Every task has a **real-world DevOps outcome**
-- Every learner builds a **public GitHub proof of work**
-- Every concept is reinforced through **hands-on practice**
-- Learning is aligned with **live classes and recordings**
-
-By the end of 90 days, you will have:
-- Strong DevOps fundamentals
-- Multiple mini-projects
-- One end-to-end DevOps capstone project
-- A GitHub profile that clearly shows consistency
-- Confidence to handle DevOps interviews and production systems
-
----
-
-## 🧠 Who Is This For?
-
-This challenge is ideal for:
-
-- Students and freshers entering DevOps or Cloud
-- Working professionals switching to DevOps / SRE / Cloud roles
-- Developers who want to understand infrastructure and CI/CD
-- Anyone who believes **consistency beats talent**
-
-No prior DevOps experience is required.  
-**Commitment is mandatory.**
-
----
-
-## 🗂 Repository Structure
+# 📂 Repository Structure
 
 ```
-90DaysOfDevOps/
+90daysofdevops/
 │
-├── README.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── .gitignore
+├── day-01
+├── day-02
+├── day-03
 │
-├── scripts/
-│   └── helper-scripts.sh
+├── day-29-docker
+├── day-30-docker-images
+├── day-31-containers
 │
-├── day-01/
-│   └── README.md
-├── day-02/
-│   └── README.md
-├── ...
-├── day-90/
-│   └── README.md
+├── day-36-docker-compose
+├── day-37-docker-revision
+│
+├── day-40-github-actions
+│   ├── .github/workflows
+│   ├── hello.yml
+│   └── screenshots
 ```
 
----
+Each folder contains:
 
-## 📅 How the Challenge Works
-
-- **One day = one task**
-- Tasks are aligned with **live classes**
-- Live class days focus on **core concepts**
-- Weekdays focus on **practice and reinforcement**
-- Daily commits are encouraged
-
-Even **30–60 minutes per day** is enough if done honestly.
+* 📄 Markdown notes
+* 🧪 Practice exercises
+* 📸 Screenshots of working implementations
 
 ---
 
-## 🛠 What You Will Learn
+# 🛠 Tech Stack So Far
 
-- Linux fundamentals and troubleshooting
-- Shell scripting and automation
-- Networking basics for DevOps
-- Git and GitHub workflows
-- Docker and containerization
-- AWS core and advanced services
-- CI/CD using Jenkins, GitHub Actions, GitLab
-- DevSecOps fundamentals
-- Kubernetes, Helm, ArgoCD
-- Terraform and Ansible
-- Observability with Grafana, Prometheus, OpenTelemetry
-- End-to-end DevOps project
+* **Linux**
+* **Git**
+* **GitHub**
+* **Docker**
+* **Docker Compose**
+* **GitHub Actions**
+* **Flask**
+* **Redis**
+* **MySQL**
 
 ---
 
-## 📦 How to Participate
+# 📈 Why I'm Doing This
 
-1. Fork this repository
-2. Clone your fork
-3. Navigate to the current `day-XX` folder
-4. Complete the task
-5. Commit and push your work
+DevOps is best learned **by building and breaking things**.
 
----
+This challenge helps me:
 
-## 🌍 Learn in Public
-
-Share your progress on LinkedIn:
-
-```
-#90DaysOfDevOps
-#DevOpsKaJosh
-#TrainWithShubham
-```
+* Build **real infrastructure knowledge**
+* Develop **deployment automation skills**
+* Create a **public proof of work**
 
 ---
 
-## ❤️ Final Note
+# 🔗 Connect With Me
 
-DevOps is not about tools.  
-It is about **ownership, reliability, and consistency**.
+If you're also learning DevOps or working in Cloud:
 
-One day at a time.  
-One commit at a time.
+* Connect on **LinkedIn**
+* Check out my other projects
 
-Happy Learning  
-**TrainWithShubham**
+---
+
+⭐ If you find this repository useful, feel free to **star it**!
