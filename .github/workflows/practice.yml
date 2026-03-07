@@ -17,10 +17,9 @@ jobs:
         steps:
             # sets the workspace for the tasks to be executed
             - name: checkout-code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v4               # sets the workspace for the tasks to be executed
               with:
-                  submodules: false
-                  
+                submodules: false
             - name: Setup GitHub Pages
               uses: actions/configure-pages@v4
             - name: Upload static files
