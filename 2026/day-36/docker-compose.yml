@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 services:
   mysql:
     image: mysql:8.0
@@ -38,3 +39,47 @@ networks:
   mydb-net:
 volumes:
   mysql-db:
+=======
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysqlcontainer
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mysql
+      MYSQL_DATABASE: mydb
+      MYSQL_PASSWORD: root
+    networks:
+      - mydb-net
+    volumes:
+      - mysql-db:/var/lib/mysql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 5 
+
+  flask:
+    image: heyyprakhar1/app-mini:latest
+    container_name: flask-container
+    networks:
+      - mydb-net
+    depends_on: 
+      mysql:
+        condition: service_healthy
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: mysql
+      MYSQL_DB: mydb
+      MYSQL_PASSWORD: root
+
+volumes:
+  mysql-db:
+
+networks:
+  mydb-net:
+>>>>>>> 855a14a (Remove accidental submodule references)
