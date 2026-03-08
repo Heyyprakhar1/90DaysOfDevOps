@@ -1,0 +1,14 @@
+name: self-hosted-wf
+on:
+  push:
+    branches: [daily-assignment]
+jobs:
+  self-hosted-runner:
+    runs-on: self-hosted
+    steps:
+      - name: Print the hostname of the machine
+        run: echo "hostname -I"
+      - name: Prints the working directory
+        run: pwd
+      - name: Create a file and verify it exists on your machine after the run
+        run: touch file1.txt && grep | file1.txt
