@@ -1,0 +1,28 @@
+name: portfolio-website
+on: 
+  push:
+    branches: [daily-assignment]
+    paths:
+       - "**.html"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  portfolio-website:
+    runs-on: self-hosted
+    environment:
+      name: GitHub Pages
+      url: ${{ steps.deploy-pages.outputs.page_url }}
+    steps:
+      - name: checkout-code
+        uses: actions/checkout@v4
+      - name: set github pages
+        uses: actions/configure-pages@v4
+      - name: upload static files
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy to GitHub pages
+        id: deploy-pages
+        uses: actions/deploy-pages@v4
