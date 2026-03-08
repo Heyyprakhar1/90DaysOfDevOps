@@ -1,0 +1,22 @@
+name: version-checking-job
+on:
+  push:
+    branches: [daily-assignment]
+jobs:
+  ubuntu-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checks the dependencies version
+        run: docker --version && python --version && node --version && git --version
+      - name: prints the task name
+        run: uname -a && $RUNNER && whoami
+  windows-jobs:
+    runs-on: windows-latest
+    steps:
+      - name: prints the task name
+        run: uname -a && $RUNNER && whoami
+  macos-jobs:
+    runs-on: macos-latest
+    steps:
+      - name: prints the task name
+        run: uname -a && $RUNNER && whoami
