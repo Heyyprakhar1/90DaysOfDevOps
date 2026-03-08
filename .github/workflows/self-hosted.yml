@@ -7,8 +7,10 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Print the hostname of the machine
-        run: echo "hostname -I"
+        run: hostname -I
       - name: Prints the working directory
         run: pwd
-      - name: Create a file and verify it exists on your machine after the run
-        run: touch file1.txt && grep | file1.txt
+      - name: Create a file 
+        run: touch file1.txt
+      - name: verify that file1.txt exists
+        run: cat file1.txt
