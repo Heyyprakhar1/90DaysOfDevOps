@@ -4,7 +4,7 @@ on:
     branches: [daily-assignment]
 jobs:
   self-hosted-runner:
-    runs-on: self-hosted
+    runs-on:  [self-hosted,ubuntu-label]
     steps:
       - name: Print the hostname of the machine
         run: hostname -I
