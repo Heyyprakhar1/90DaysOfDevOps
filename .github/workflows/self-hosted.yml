@@ -1,0 +1,16 @@
+name: self-hosted-wf
+on:
+  push:
+    branches: [daily-assignment]
+jobs:
+  self-hosted-runner:
+    runs-on:  [self-hosted,ubuntu-label]
+    steps:
+      - name: Print the hostname of the machine
+        run: hostname -I
+      - name: Prints the working directory
+        run: pwd
+      - name: Create a file 
+        run: touch file1.txt
+      - name: verify that file1.txt exists
+        run: cat file1.txt
