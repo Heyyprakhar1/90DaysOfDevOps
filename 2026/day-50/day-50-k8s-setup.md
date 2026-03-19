@@ -2,9 +2,9 @@
 
 ## Why Kubernetes Exists
 
-Docker solved the "how do I run this container" problem. But the moment you have 50 containers across 10 servers, Docker alone doesn't know what to do. Which server has capacity? What happens when a container crashes at 2am? How do services find each other?
+Docker solved the "how do I run this container" problem. But the moment you have 50 containers across 10 servers, Docker alone doesn't know what to do. Which server has capacity? What happens when a container crashes at 2 am? How do services find each other?
 
-Kubernetes — originally built at Google, based on their internal system called Borg — was open-sourced in 2014 to answer exactly those questions. The name comes from the Greek word for "helmsman" or "pilot." The K8s shorthand comes from the 8 letters between K and s. Google had been running containerized workloads in production for years before Kubernetes existed, and they essentially packaged that experience into an open-source project.
+Kubernetes — originally built at Google, based on their internal system called Borg — was open-sourced in 2014 to answer exactly those questions. The name comes from the Greek word for "helmsman" or "pilot." The K8S shorthand comes from the 8 letters between K and s. Google had been running containerised workloads in production for years before Kubernetes existed, and they essentially packaged that experience into an open-source project.
 
 You tell Kubernetes *what you want* — 3 replicas of this app, always — and it figures out the how, and keeps it that way even if servers die.
 
@@ -18,7 +18,7 @@ You tell Kubernetes *what you want* — 3 replicas of this app, always — and i
 
 **etcd** — a key-value store that holds the entire cluster state. If etcd goes down, the cluster goes blind. Nothing gets created or deleted until it's back.
 
-**Scheduler** — when a new pod needs to run, the scheduler looks at all the nodes, checks their available CPU and memory, and picks the best fit.
+**Scheduler** — When a new pod needs to run, the scheduler looks at all the nodes, checks their available CPU and memory, and picks the best fit.
 
 **Controller Manager** — this is what watches the cluster constantly. If you said "I want 3 replicas" and one pod dies, the controller manager is what notices and tells the API server to spin up a replacement.
 
@@ -28,7 +28,7 @@ You tell Kubernetes *what you want* — 3 replicas of this app, always — and i
 
 **kube-proxy** — handles the networking rules. Every time a pod needs to reach another pod or service, kube-proxy is what makes that routing work.
 
-**Container Runtime** — the actual engine running the containers. In modern clusters this is usually `containerd` or `CRI-O`. Docker used to be here but Kubernetes dropped direct Docker support a while back.
+**Container Runtime** — the actual engine running the containers. In modern clusters, this is usually `containerd` or `CRI-O`. Docker used to be here, but Kubernetes dropped direct Docker support a while back.
 
 ### What happens when you run `kubectl apply -f pod.yaml`?
 
@@ -38,17 +38,17 @@ You tell Kubernetes *what you want* — 3 replicas of this app, always — and i
 4. The **kubelet** on that node gets the instruction and pulls the image
 5. The container starts running via the **container runtime**
 
-If the API server goes down — nothing new can be created or modified, but existing pods keep running. The cluster isn't dead, it just can't accept any changes.
+If the API server goes down, nothing new can be created or modified, but existing pods keep running. The cluster isn't dead; it just can't accept any changes.
 
-If a worker node goes down — the controller manager notices the pods on that node are gone and reschedules them to healthy nodes.
+If a worker node goes down, the controller manager notices the pods on that node are gone and reschedules them to healthy nodes.
 
 ---
 
 ## Tool Choice: kind
 
-I went with **kind** (Kubernetes in Docker). The main reason: it works inside WSL without needing a separate VM. Minikube can need a hypervisor driver depending on your setup, and that adds friction. With kind, as long as Docker is running, you're good.
+I went with **kind** (Kubernetes in Docker). The main reason: it works inside WSL without needing a separate VM. Minikube may need a hypervisor driver depending on your setup, and that adds friction. With kind, as long as Docker is running, you're good.
 
-I used a `config.yml` to create a multi-node cluster instead of the default single-node — one control plane and three workers. More realistic setup for actually practicing scheduling and node behavior.
+I used a `config.yml` to create a multi-node cluster instead of the default single-node — one control plane and three workers. More realistic setup for actually practising scheduling and node behaviour.
 
 ```yaml
 # config.yml used to create the cluster
@@ -195,7 +195,7 @@ kubectl config view
 # Cluster lifecycle
 kind create cluster --config config.yml --name demo-cluster
 kind delete cluster --name demo-cluster
-kind get clusters
+Kind get clusters
 ```
 
 ---
@@ -208,7 +208,7 @@ Across both environments (WSL + EC2), I:
 - Ran `kubectl get nodes`, `kubectl cluster-info`, `kubectl get pods -A`
 - Matched every pod in `kube-system` to its architecture component
 - Created a custom namespace (`nginx-ns`) and switched the context to it
-- Deployed a `two-tier-app` pod and verified it was Running
+- Deployed a `two-tier-app` pod and verified it was running
 - Explored `kubectl config view` and understood the kubeconfig structure
 
 Day 50 done. The orchestration chapter is open.
