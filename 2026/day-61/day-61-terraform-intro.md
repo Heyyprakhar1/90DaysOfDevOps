@@ -42,7 +42,8 @@ IaC fixes all of this: your infrastructure is in a `.tf` file, tracked in Git, r
 
 Verified Terraform v1.14.8 installed on Linux (WSL2/Ubuntu), AWS CLI v2.28.21 configured, and AWS credentials validated using `aws sts get-caller-identity` — confirming the IAM user `terra-for-practice` under account `373515081834`.
 
-![Terraform version and AWS CLI configured](screenshots/Screenshot_2026-04-01_130719.png)
+![Terraform version and AWS CLI configured]<img width="1207" height="421" alt="Screenshot 2026-04-01 130719" src="https://github.com/user-attachments/assets/b10c2275-2055-465f-adb1-989bca235c65" />
+
 
 ---
 
@@ -52,7 +53,8 @@ Verified Terraform v1.14.8 installed on Linux (WSL2/Ubuntu), AWS CLI v2.28.21 co
 
 Wrote the config using `vim`, ran `terraform fmt` to auto-format, and `terraform validate` to confirm the syntax was correct before running any commands. The provider was set to `eu-west-1` (Ireland) with the `hashicorp/aws` provider version `6.38.0`.
 
-![main.tf content and terraform init output](screenshots/Screenshot_2026-04-01_131716.png)
+![main.tf content and terraform init output]<img width="1905" height="1138" alt="Screenshot 2026-04-01 133112" src="https://github.com/user-attachments/assets/2ab89711-24de-4c19-82e8-00f1a7d4995d" />
+
 
 ### What `terraform init` Downloaded
 
@@ -65,13 +67,15 @@ The `.terraform/` directory contains:
 
 ### `terraform apply` — Bucket Created
 
-![terraform apply creating S3 bucket and aws s3 ls confirmation](screenshots/Screenshot_2026-04-01_132627.png)
+![terraform apply creating S3 bucket and aws s3 ls confirmation]<img width="905" height="1101" alt="Screenshot 2026-04-01 135230" src="https://github.com/user-attachments/assets/2d00e74b-787e-4913-906b-2e37489516c1" />
+
 
 The bucket `tws-terraweek-bucket` was created in 6 seconds. Confirmed with `aws s3 ls` — the bucket appeared with timestamp `2026-04-01 07:55:43`.
 
 ### S3 Bucket in the AWS Console
 
-![S3 bucket visible in AWS console in eu-west-1](screenshots/Screenshot_2026-04-01_133112.png)
+![S3 bucket visible in AWS console in eu-west-1](<img width="1905" height="1138" alt="Screenshot 2026-04-01 133112" src="https://github.com/user-attachments/assets/dbdf8184-9af8-4518-9aa0-d20228fc3200" />
+
 
 The bucket `tws-terraweek-bucket` is visible in the S3 console under the `eu-west-1 (Europe Ireland)` region, created on April 1, 2026.
 
