@@ -8,1526 +8,649 @@
 <meta property="og:title" content="Prakhar Srivastava — DevOps Engineer">
 <meta property="og:description" content="Engineer building secure cloud-native systems and infrastructure workflows.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #0c0c0d;
-  --bg2:     #111113;
-  --bg3:     #161618;
-  --bg4:     #1c1c1f;
-  --border:  rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --green:   #22c55e;
-  --green2:  #16a34a;
-  --green-dim: rgba(34,197,94,0.08);
-  --blue:    #60a5fa;
-  --cyan:    #22d3ee;
-  --amber:   #f59e0b;
-  --text:    #f4f4f5;
-  --text2:   #a1a1aa;
-  --text3:   #71717a;
-  --mono:    'JetBrains Mono', monospace;
-  --sans:    'Geist', system-ui, sans-serif;
+  --bg:        #0d2b4e;
+  --bg2:       #0a2138;
+  --panel:     #112e52;
+  --grid:      rgba(238,245,250,0.06);
+  --grid2:     rgba(238,245,250,0.13);
+  --line:      #eef5fa;
+  --dim:       #9bb6cc;
+  --dim2:      #5f7f9c;
+  --stamp:     #c1440e;
+  --stamp-bg:  rgba(193,68,14,0.08);
+  --cyan:      #5fd0e0;
+  --gold:      #d4a23c;
+  --gold-bg:   rgba(212,162,60,0.08);
+  --f-disp:    'Space Grotesk', sans-serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
+  color: var(--line);
+  font-family: var(--f-body);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* GRID BACKGROUND — subtle, restrained */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 30%, transparent 80%);
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid2) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
   pointer-events: none;
   z-index: 0;
 }
 
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(1.5rem, 5vw, 4rem);
-  height: 56px;
-  background: rgba(12,12,13,0.8);
-  backdrop-filter: blur(16px) saturate(1.4);
-  border-bottom: 1px solid var(--border);
+a { color: inherit; }
+:focus-visible { outline: 1.5px dashed var(--cyan); outline-offset: 3px; }
+
+.reg-mark { position: absolute; width: 14px; height: 14px; pointer-events: none; opacity: .5; }
+.reg-mark::before, .reg-mark::after { content: ''; position: absolute; background: var(--dim2); }
+.reg-mark::before { width: 14px; height: 1px; top: 6.5px; }
+.reg-mark::after { width: 1px; height: 14px; left: 6.5px; }
+.reg-tl { top: 10px; left: 10px; } .reg-tr { top: 10px; right: 10px; }
+.reg-bl { bottom: 10px; left: 10px; } .reg-br { bottom: 10px; right: 10px; }
+
+/* ===== HEADER ===== */
+.sheet-header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: .9rem clamp(1.2rem, 5vw, 3rem);
+  border-bottom: 1px solid var(--grid2);
+  background: rgba(10,33,56,0.88);
+  backdrop-filter: blur(10px);
+}
+.dwg-tag {
+  font-family: var(--f-mono); font-size: .68rem; letter-spacing: .08em;
+  color: var(--cyan); border: 1px solid rgba(95,208,224,0.3);
+  padding: .2rem .55rem; border-radius: 2px; flex-shrink: 0; white-space: nowrap;
+}
+.sheet-title { font-family: var(--f-disp); font-size: .8rem; font-weight: 600; letter-spacing: .02em; flex: 1; }
+.sheet-title .dim { color: var(--dim2); font-weight: 400; }
+.sheet-nav { display: flex; gap: 1.3rem; font-family: var(--f-mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; }
+.sheet-nav a { color: var(--dim); text-decoration: none; transition: color .15s; }
+.sheet-nav a:hover { color: var(--cyan); }
+#hamburger { display: none; background: transparent; border: 1px solid var(--grid2); color: var(--dim); font-size: 1rem; padding: .25rem .55rem; cursor: pointer; border-radius: 2px; }
+@media (max-width: 760px) { .sheet-nav { display: none; } #hamburger { display: block; } }
+
+/* ===== SECTION shared ===== */
+section { position: relative; z-index: 1; padding: clamp(3rem, 8vw, 6rem) clamp(1.2rem, 6vw, 4rem); max-width: 1180px; margin: 0 auto; }
+.sheet-label {
+  font-family: var(--f-mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: .8rem; display: flex; align-items: center; gap: .75rem;
+}
+.sheet-label::after { content:''; flex:1; max-width: 280px; height: 1px; background: var(--grid2); }
+.section-intro { color: var(--dim); font-size: .92rem; line-height: 1.7; max-width: 520px; margin-bottom: 2.2rem; }
+
+/* ===== STAMP ===== */
+.stamp {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; font-family: var(--f-mono); font-size: .62rem; font-weight: 600;
+  letter-spacing: .06em; line-height: 1.3; color: var(--stamp); border: 2px solid var(--stamp);
+  background: var(--stamp-bg); border-radius: 50%; width: 84px; height: 84px;
+  transform: rotate(-9deg); flex-shrink: 0; text-decoration: none;
+}
+.stamp.cyan { color: var(--cyan); border-color: rgba(95,208,224,0.6); background: rgba(95,208,224,0.06); }
+
+.cred-line {
+  display: inline-flex; align-items: center; gap: .5rem; font-family: var(--f-mono); font-size: .7rem;
+  color: var(--gold); text-decoration: none; border: 1px solid rgba(212,162,60,0.3);
+  background: var(--gold-bg); padding: .55rem .9rem; transition: background .15s;
+}
+.cred-line:hover { background: rgba(212,162,60,0.16); }
+
+/* ===== HERO / COVER SHEET ===== */
+.cover-grid { display: grid; grid-template-columns: 1fr 280px; gap: 3rem; align-items: start; }
+.proj-label { font-family: var(--f-mono); font-size: .68rem; color: var(--dim2); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 1rem; }
+.cover-title { font-family: var(--f-disp); font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; margin-bottom: 1.1rem; }
+.cover-sub { font-family: var(--f-mono); font-size: .85rem; color: var(--cyan); letter-spacing: .02em; margin-bottom: 1.5rem; }
+.cover-desc { max-width: 500px; color: var(--dim); font-size: .96rem; line-height: 1.75; margin-bottom: 1.8rem; }
+.cover-desc strong { color: var(--line); font-weight: 500; }
+.cover-cta { display: flex; flex-wrap: wrap; gap: .65rem; margin-bottom: 1.8rem; }
+.ref-btn { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .03em; border: 1px solid var(--dim2); color: var(--dim); padding: .55rem 1.05rem; text-decoration: none; display: inline-flex; transition: border-color .15s, color .15s; }
+.ref-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.cover-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+.rev-block { border: 1px solid var(--grid2); background: var(--panel); }
+.rev-head { font-family: var(--f-mono); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim2); padding: .7rem .9rem; border-bottom: 1px solid var(--grid2); }
+.rev-table { width: 100%; border-collapse: collapse; font-family: var(--f-mono); font-size: .72rem; }
+.rev-table th { text-align: left; color: var(--dim2); font-weight: 500; letter-spacing: .04em; padding: .5rem .9rem; border-bottom: 1px solid var(--grid2); font-size: .6rem; }
+.rev-table td { padding: .6rem .9rem; border-bottom: 1px solid var(--grid); color: var(--line); vertical-align: top; }
+.rev-table tr:last-child td { border-bottom: none; }
+.rev-table td:first-child { color: var(--cyan); font-weight: 600; }
+.rev-table td:last-child { color: var(--dim2); white-space: nowrap; }
+
+.photo-orb { position: absolute; top: 1.6rem; right: .2rem; width: clamp(86px, 16vw, 128px); height: clamp(86px, 16vw, 128px); border-radius: 50%; overflow: hidden; border: 2px solid var(--cyan); background: var(--bg2); z-index: 2; }
+.photo-orb .photo-img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.08) brightness(1.04); }
+.photo-orb .photo-tint { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(13,43,78,0.55), rgba(95,208,224,0.18)); mix-blend-mode: color; pointer-events: none; }
+
+/* ===== DRAWING SHEET (projects) ===== */
+.drawings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; margin-top: 1.4rem; }
+.drawing-sheet { border: 1px solid var(--grid2); background: var(--panel); position: relative; transition: border-color .2s; }
+.drawing-sheet:hover { border-color: var(--dim2); }
+.drawing-head { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--grid2); flex-wrap: wrap; }
+.dwg-name { font-family: var(--f-disp); font-size: 1rem; font-weight: 600; flex: 1; }
+.drawing-body { padding: 1.6rem 1.4rem; display: flex; flex-direction: column; gap: 1.1rem; }
+.drawing-body.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 720px) { .drawing-body.two-col { grid-template-columns: 1fr; } }
+
+.proc-label { font-family: var(--f-mono); font-size: .62rem; color: var(--dim2); letter-spacing: .1em; text-transform: uppercase; }
+.proc-strip { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; }
+.proc-chip { font-family: var(--f-mono); font-size: .64rem; padding: .25rem .55rem; border: 1px solid var(--dim2); color: var(--dim); background: var(--bg2); white-space: nowrap; }
+.proc-chip.done { color: var(--cyan); border-color: rgba(95,208,224,.4); background: rgba(95,208,224,.06); }
+.proc-arrow { font-family: var(--f-mono); font-size: .64rem; color: var(--dim2); }
+
+.spec-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.spec-tag { font-family: var(--f-mono); font-size: .64rem; padding: .22rem .55rem; border: 1px solid var(--dim2); color: var(--dim); background: var(--bg2); white-space: nowrap; }
+.spec-tag.cyan { border-color: rgba(95,208,224,.4); color: var(--cyan); background: rgba(95,208,224,.06); }
+.spec-tag.stamp { border-color: rgba(193,68,14,.4); color: var(--stamp); background: var(--stamp-bg); }
+
+.drawing-desc { color: var(--dim); font-size: .87rem; line-height: 1.7; }
+.drawing-notes { font-size: .82rem; color: var(--dim); line-height: 1.7; }
+.ref-link { display: inline-flex; align-items: center; gap: .35rem; font-family: var(--f-mono); font-size: .68rem; color: var(--dim2); text-decoration: none; letter-spacing: .04em; transition: color .15s; }
+.ref-link:hover { color: var(--cyan); }
+
+/* ===== FIELD NOTES ===== */
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--grid2); border: 1px solid var(--grid2); }
+.note { background: var(--bg); padding: 1.5rem; display: flex; gap: 1rem; }
+.note-no { font-family: var(--f-mono); font-size: .68rem; color: var(--cyan); flex-shrink: 0; padding-top: .15rem; }
+.note-body { font-size: .86rem; color: var(--dim); line-height: 1.65; }
+.note-body strong { color: var(--line); font-weight: 600; display: block; margin-bottom: .25rem; font-family: var(--f-disp); }
+
+/* ===== BILL OF MATERIALS ===== */
+.bom-wrap { border: 1px solid var(--grid2); background: var(--panel); }
+.bom-title-row { display: grid; grid-template-columns: 50px 190px 1fr; gap: 1rem; padding: .7rem 1.3rem; border-bottom: 1px solid var(--grid2); font-family: var(--f-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim2); }
+.bom-row { display: grid; grid-template-columns: 50px 190px 1fr; gap: 1rem; padding: 1rem 1.3rem; border-bottom: 1px solid var(--grid); align-items: start; }
+.bom-row:last-child { border-bottom: none; }
+.bom-no { font-family: var(--f-mono); font-size: .74rem; color: var(--cyan); }
+.bom-cat { font-family: var(--f-disp); font-size: .88rem; font-weight: 600; }
+.bom-items { display: flex; flex-wrap: wrap; gap: .4rem; }
+@media (max-width: 640px) {
+  .bom-title-row { display: none; }
+  .bom-row { grid-template-columns: 1fr; gap: .5rem; }
+  .bom-no { display: none; }
 }
 
-.nav-logo {
-  font-family: var(--mono);
-  font-size: .8rem;
-  color: var(--text2);
-  letter-spacing: .04em;
-}
-.nav-logo .accent { color: var(--green); }
+/* ===== R&D LOG ===== */
+.rd-list { display: flex; flex-direction: column; border: 1px solid var(--grid2); background: var(--panel); max-width: 700px; }
+.rd-item { display: flex; gap: 1.2rem; padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--grid); }
+.rd-item:last-child { border-bottom: none; }
+.rd-no { font-family: var(--f-mono); font-size: .65rem; color: var(--dim2); padding-top: .2rem; flex-shrink: 0; width: 1.6rem; }
+.rd-topic { font-family: var(--f-disp); font-weight: 600; font-size: .9rem; margin-bottom: .2rem; }
+.rd-note { font-family: var(--f-mono); font-size: .67rem; color: var(--dim); }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-.nav-links a {
-  font-family: var(--mono);
-  font-size: .72rem;
-  color: var(--text3);
-  text-decoration: none;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  transition: color .15s;
-}
-.nav-links a:hover { color: var(--text); }
+/* ===== REFERENCE DOCUMENTS ===== */
+.refs-list { border: 1px solid var(--grid2); background: var(--panel); }
+.ref-item { display: grid; grid-template-columns: 36px 1fr auto; gap: 1.2rem; align-items: center; padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--grid); text-decoration: none; color: inherit; transition: background .15s; }
+.ref-item:last-child { border-bottom: none; }
+.ref-item:hover { background: var(--bg2); }
+.ref-no { font-family: var(--f-mono); font-size: .7rem; color: var(--cyan); }
+.ref-title { font-family: var(--f-disp); font-weight: 600; font-size: .9rem; margin-bottom: .25rem; line-height: 1.4; }
+.ref-desc { font-size: .78rem; color: var(--dim2); line-height: 1.5; }
+.ref-meta { font-family: var(--f-mono); font-size: .64rem; color: var(--dim2); white-space: nowrap; letter-spacing: .03em; }
+@media (max-width: 640px) { .ref-item { grid-template-columns: 28px 1fr; } .ref-meta { display: none; } }
 
-.nav-status {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  font-family: var(--mono);
-  font-size: .7rem;
-  color: var(--green);
-  letter-spacing: .04em;
-}
-.status-dot {
-  width: 6px; height: 6px;
-  background: var(--green);
-  border-radius: 50%;
-  animation: pulse 2.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .3; }
-}
+/* ===== SEALS (certification) ===== */
+.seals-wrap { display: flex; flex-direction: column; gap: 1rem; max-width: 700px; }
+.seal-block { border: 1px solid var(--grid2); background: var(--panel); padding: 1.8rem; display: flex; flex-direction: column; gap: 1.1rem; }
+.seal-head { display: flex; align-items: center; gap: 1.2rem; }
+.seal-ring { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--gold); flex-shrink: 0; }
+.seal-name { font-family: var(--f-disp); font-weight: 600; font-size: .98rem; margin-bottom: .2rem; }
+.seal-org { font-family: var(--f-mono); font-size: .7rem; color: var(--gold); letter-spacing: .03em; }
+.seal-desc { font-size: .85rem; color: var(--dim); line-height: 1.7; }
+.seal-detail { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--grid2); font-family: var(--f-mono); font-size: .68rem; }
+.seal-id { color: var(--dim2); }
+.seal-verify { color: var(--cyan); border: 1px solid rgba(95,208,224,0.3); padding: .3rem .8rem; text-decoration: none; }
+.seal-verify:hover { background: rgba(95,208,224,0.08); }
 
-/* SECTIONS */
-section {
-  position: relative;
-  z-index: 1;
-  padding: 6rem clamp(1.5rem, 8vw, 7rem);
-}
+/* ===== RFI (contact) ===== */
+.rfi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; max-width: 980px; }
+@media (max-width: 760px) { .rfi-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+.rfi-title { font-family: var(--f-disp); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -.01em; line-height: 1.15; margin-bottom: 1rem; }
+.rfi-sub { color: var(--dim); font-size: .92rem; line-height: 1.75; margin-bottom: 1.6rem; max-width: 480px; }
+.rfi-sub strong { color: var(--line); font-weight: 500; }
+.rfi-links { display: flex; flex-direction: column; gap: .6rem; }
+.rfi-link { display: flex; align-items: center; gap: 1rem; padding: .85rem 1.05rem; background: var(--panel); border: 1px solid var(--grid2); text-decoration: none; color: var(--line); transition: border-color .15s, background .15s; }
+.rfi-link:hover { border-color: var(--dim2); background: var(--bg2); }
+.rfi-icon { font-family: var(--f-mono); font-size: .7rem; color: var(--cyan); width: 1.6rem; flex-shrink: 0; }
+.rfi-label { font-family: var(--f-mono); font-size: .6rem; color: var(--dim2); letter-spacing: .08em; text-transform: uppercase; display: block; }
+.rfi-val { font-size: .85rem; }
 
-.section-label {
-  font-family: var(--mono);
-  font-size: .68rem;
-  color: var(--text3);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  margin-bottom: 2.5rem;
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-}
-.section-label::after {
-  content: '';
-  flex: 1;
-  max-width: 320px;
-  height: 1px;
-  background: var(--border);
+.rfi-form .form-field { margin-bottom: 1rem; }
+.rfi-form label { display: block; font-family: var(--f-mono); font-size: .6rem; color: var(--dim2); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .4rem; }
+.rfi-form input, .rfi-form textarea { width: 100%; background: var(--panel); border: 1px solid var(--grid2); color: var(--line); font-family: var(--f-mono); font-size: .8rem; padding: .65rem .9rem; outline: none; transition: border-color .15s; resize: vertical; }
+.rfi-form input:focus, .rfi-form textarea:focus { border-color: var(--cyan); }
+.rfi-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+@media (max-width: 480px) { .rfi-row { grid-template-columns: 1fr; } }
+#rfiSubmit { width: 100%; margin-top: .3rem; background: var(--cyan); color: #06202f; border: none; font-weight: 600; font-family: var(--f-mono); font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; padding: .7rem 1.2rem; cursor: pointer; }
+#rfiSubmit:disabled { background: var(--dim2); color: var(--bg); cursor: not-allowed; }
+.rfi-msg { display: none; font-family: var(--f-mono); font-size: .7rem; padding: .7rem 1rem; margin-top: .7rem; }
+.rfi-msg.success { border: 1px solid rgba(95,208,224,0.3); color: var(--cyan); background: rgba(95,208,224,0.06); }
+.rfi-msg.error { border: 1px solid rgba(193,68,14,0.3); color: var(--stamp); background: var(--stamp-bg); }
+
+/* ===== FOOTER ===== */
+.title-block { position: relative; z-index: 1; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .8rem; padding: 1.4rem clamp(1.2rem, 6vw, 4rem); border-top: 1px solid var(--grid2); font-family: var(--f-mono); font-size: .66rem; color: var(--dim2); letter-spacing: .04em; }
+
+/* ===== MOTION ===== */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .reveal { opacity: 1; transform: none; }
 }
 
-/* ── HERO ── */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding-top: 8rem;
-  padding-bottom: 5rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.hero-inner { width: 100%; }
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  font-family: var(--mono);
-  font-size: .72rem;
-  color: var(--green);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-
-.hero-name {
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -.03em;
-  color: var(--text);
-  margin-bottom: 1.2rem;
-}
-.hero-name .dim { color: var(--text3); }
-
-.hero-tagline {
-  font-family: var(--mono);
-  font-size: clamp(.9rem, 1.8vw, 1.05rem);
-  color: var(--text2);
-  margin-bottom: 2rem;
-  letter-spacing: .01em;
-}
-.hero-tagline .hl { color: var(--text); }
-
-.hero-subtext {
-  max-width: 560px;
-  font-size: 1rem;
-  color: var(--text2);
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
-}
-.hero-subtext strong { color: var(--text); font-weight: 500; }
-
-.hero-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  margin-bottom: 3.5rem;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  font-family: var(--mono);
-  font-size: .75rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: .6rem 1.4rem;
-  border-radius: 3px;
-  transition: all .15s;
-  cursor: pointer;
-}
-.btn-solid {
-  background: var(--green);
-  color: #000;
-  font-weight: 600;
-  border: 1px solid var(--green);
-}
-.btn-solid:hover { background: var(--green2); border-color: var(--green2); }
-.btn-ghost {
-  background: transparent;
-  color: var(--text2);
-  border: 1px solid var(--border2);
-}
-.btn-ghost:hover { border-color: var(--text3); color: var(--text); }
-
-/* Hero terminal visual */
-.hero-visual {
-  margin-top: 1rem;
-  max-width: 540px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-}
-.term-bar {
-  display: flex;
-  align-items: center;
-  gap: .45rem;
-  padding: .65rem 1rem;
-  background: var(--bg4);
-  border-bottom: 1px solid var(--border);
-}
-.term-bar .d { width: 9px; height: 9px; border-radius: 50%; }
-.term-bar .d1 { background: #ff5f57; }
-.term-bar .d2 { background: #febc2e; }
-.term-bar .d3 { background: #28c840; }
-.term-bar .fname {
-  margin-left: .5rem;
-  font-family: var(--mono);
-  font-size: .68rem;
-  color: var(--text3);
-}
-.term-body {
-  padding: 1.2rem 1.4rem;
-  font-family: var(--mono);
-  font-size: .78rem;
-  line-height: 2;
-}
-.t-p { color: var(--green); }
-.t-k { color: var(--blue); }
-.t-v { color: var(--cyan); }
-.t-s { color: var(--amber); }
-.t-m { color: var(--text3); }
-.t-blink {
-  display: inline-block;
-  width: 7px; height: 1.1em;
-  background: var(--green);
-  vertical-align: text-bottom;
-  margin-left: 2px;
-  animation: blink .9s step-end infinite;
-}
-@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-
-/* INFRASTRUCTURE SYSTEMS */
-#systems { background: var(--bg2); }
-
-.systems-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.system-card {
-  background: var(--bg2);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  transition: background .2s;
-  position: relative;
-}
-.system-card:hover { background: var(--bg3); }
-
-.system-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: transparent;
-  transition: background .2s;
-}
-.system-card:hover::before { background: var(--green); }
-.system-card.flagship::before { background: var(--green); }
-
-.system-id {
-  font-family: var(--mono);
-  font-size: .64rem;
-  color: var(--text3);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.system-id.active { color: var(--green); }
-
-.system-name {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.4;
-}
-
-.system-meta {
-  font-size: .85rem;
-  color: var(--text2);
-  line-height: 1.7;
-  flex: 1;
-}
-
-/* Workflow bar — shows the pipeline/flow */
-.workflow {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
-  margin: .2rem 0;
-}
-.wf-step {
-  font-family: var(--mono);
-  font-size: .62rem;
-  color: var(--text3);
-  padding: .25rem .5rem;
-  background: var(--bg4);
-  border: 1px solid var(--border);
-  letter-spacing: .04em;
-  white-space: nowrap;
-}
-.wf-step.green { color: var(--green); border-color: rgba(34,197,94,.2); background: var(--green-dim); }
-.wf-arr {
-  font-family: var(--mono);
-  font-size: .65rem;
-  color: var(--text3);
-  padding: 0 .2rem;
-}
-
-.system-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
-}
-.tag {
-  font-family: var(--mono);
-  font-size: .65rem;
-  padding: .2rem .55rem;
-  border-radius: 2px;
-  letter-spacing: .03em;
-  white-space: nowrap;
-}
-.tag-default { background: var(--bg4); border: 1px solid var(--border); color: var(--text3); }
-.tag-green { background: var(--green-dim); border: 1px solid rgba(34,197,94,.2); color: var(--green); }
-.tag-blue { background: rgba(96,165,250,.06); border: 1px solid rgba(96,165,250,.15); color: var(--blue); }
-.tag-amber { background: rgba(245,158,11,.06); border: 1px solid rgba(245,158,11,.15); color: var(--amber); }
-.tag-cyan { background: rgba(34,211,238,.06); border: 1px solid rgba(34,211,238,.15); color: var(--cyan); }
-
-.system-link {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-  font-family: var(--mono);
-  font-size: .68rem;
-  color: var(--text3);
-  text-decoration: none;
-  letter-spacing: .05em;
-  transition: color .15s;
-  margin-top: .2rem;
-}
-.system-link:hover { color: var(--green); }
-
-/* OPERATIONAL THINKING */
-#thinking { background: var(--bg); }
-
-.thinking-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.thinking-card {
-  border: 1px solid var(--border);
-  padding: 1.6rem;
-  border-radius: 4px;
-  background: transparent;
-  transition: border-color .2s;
-}
-.thinking-card:hover { border-color: var(--border2); }
-
-.thinking-icon {
-  font-family: var(--mono);
-  font-size: .75rem;
-  color: var(--green);
-  margin-bottom: 1rem;
-  letter-spacing: .1em;
-}
-
-.thinking-title {
-  font-size: .95rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: .6rem;
-}
-
-.thinking-body {
-  font-size: .85rem;
-  color: var(--text2);
-  line-height: 1.7;
-}
-
-/* SKILLS */
-#skills { background: var(--bg2); }
-
-.skills-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-}
-.skills-group {
-  padding: 1.6rem 1.8rem;
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-.skills-group:nth-child(2n) { border-right: none; }
-.skills-group:nth-last-child(-n+2) { border-bottom: none; }
-
-.sg-label {
-  font-family: var(--mono);
-  font-size: .64rem;
-  color: var(--text3);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  margin-bottom: .9rem;
-}
-
-.sg-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
-}
-
-/* CURRENTLY EXPLORING */
-#exploring { background: var(--bg); }
-
-.explore-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  max-width: 640px;
-}
-.explore-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.2rem;
-  padding: 1.2rem 1.6rem;
-  border-bottom: 1px solid var(--border);
-  transition: background .15s;
-}
-.explore-item:last-child { border-bottom: none; }
-.explore-item:hover { background: var(--bg3); }
-.explore-num {
-  font-family: var(--mono);
-  font-size: .65rem;
-  color: var(--text3);
-  letter-spacing: .06em;
-  padding-top: .15rem;
-  flex-shrink: 0;
-  width: 1.8rem;
-}
-.explore-content {}
-.explore-topic {
-  font-size: .92rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: .2rem;
-}
-.explore-note {
-  font-family: var(--mono);
-  font-size: .7rem;
-  color: var(--text3);
-  letter-spacing: .03em;
-}
-
-/* BLOGS */
-#blogs { background: var(--bg2); }
-
-.blogs-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-}
-.blog-item {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.3rem 1.6rem;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none;
-  transition: background .15s;
-}
-.blog-item:last-child { border-bottom: none; }
-.blog-item:hover { background: var(--bg3); }
-.blog-num {
-  font-family: var(--mono);
-  font-size: .65rem;
-  color: var(--text3);
-  width: 2.5rem;
-  flex-shrink: 0;
-}
-.blog-content {}
-.blog-title {
-  font-size: .92rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: .25rem;
-  line-height: 1.4;
-}
-.blog-desc {
-  font-size: .8rem;
-  color: var(--text3);
-  line-height: 1.5;
-}
-.blog-meta {
-  font-family: var(--mono);
-  font-size: .65rem;
-  color: var(--text3);
-  white-space: nowrap;
-  letter-spacing: .04em;
-}
-
-/* CERTIFICATION */
-#cert { background: var(--bg); }
-
-.cert-block {
-  max-width: 580px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.cert-header {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-.cert-icon {
-  width: 44px; height: 44px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  background: var(--bg3);
-}
-.cert-name {
-  font-size: .98rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: .25rem;
-}
-.cert-org {
-  font-family: var(--mono);
-  font-size: .72rem;
-  color: var(--green);
-  letter-spacing: .04em;
-}
-
-.cert-detail {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-.cert-id {
-  font-family: var(--mono);
-  font-size: .7rem;
-  color: var(--text3);
-  letter-spacing: .04em;
-}
-.cert-link {
-  font-family: var(--mono);
-  font-size: .7rem;
-  color: var(--cyan);
-  text-decoration: none;
-  letter-spacing: .06em;
-  border: 1px solid rgba(34,211,238,.2);
-  padding: .3rem .8rem;
-  border-radius: 2px;
-  transition: background .15s;
-}
-.cert-link:hover { background: rgba(34,211,238,.06); }
-
-/* AUTOMATION HERO */
-.hero-badge {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  border: 1px solid rgba(34,197,94,.2);
-  background: rgba(34,197,94,.04);
-  padding: 1.2rem 1.6rem;
-  border-radius: 4px;
-  max-width: 640px;
-  margin-top: 2rem;
-}
-.hero-badge-icon { font-size: 1.4rem; flex-shrink: 0; }
-.hero-badge-body {}
-.hero-badge-title {
-  font-family: var(--mono);
-  font-size: .75rem;
-  color: var(--green);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  margin-bottom: .3rem;
-}
-.hero-badge-desc {
-  font-size: .82rem;
-  color: var(--text2);
-  line-height: 1.65;
-}
-.hero-badge-desc strong { color: var(--text); font-weight: 500; }
-
-/* CONTACT */
-#contact { background: var(--bg2); }
-
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
-  max-width: 900px;
-}
-
-.contact-head {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: -.02em;
-  line-height: 1.15;
-  margin-bottom: 1rem;
-}
-
-.contact-sub {
-  font-size: .9rem;
-  color: var(--text2);
-  line-height: 1.75;
-  margin-bottom: 2rem;
-}
-.contact-sub strong { color: var(--text); font-weight: 500; }
-
-.avail {
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  font-family: var(--mono);
-  font-size: .68rem;
-  color: var(--green);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-
-.contact-links { display: flex; flex-direction: column; gap: .6rem; }
-
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: .9rem 1.1rem;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color .15s, background .15s;
-}
-.contact-link:hover { border-color: var(--border2); background: var(--bg4); }
-.cl-icon {
-  font-family: var(--mono);
-  font-size: .72rem;
-  color: var(--green);
-  width: 1.5rem;
-  flex-shrink: 0;
-}
-.cl-label {
-  font-family: var(--mono);
-  font-size: .64rem;
-  color: var(--text3);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  display: block;
-}
-.cl-val { font-size: .85rem; color: var(--text); }
-
-/* Contact form */
-.form-field { margin-bottom: 1rem; }
-.form-field label {
-  display: block;
-  font-family: var(--mono);
-  font-size: .65rem;
-  color: var(--text3);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-bottom: .4rem;
-}
-.form-field input,
-.form-field textarea {
-  width: 100%;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: .8rem;
-  padding: .7rem 1rem;
-  border-radius: 3px;
-  outline: none;
-  transition: border-color .15s;
-  resize: vertical;
-}
-.form-field input:focus,
-.form-field textarea:focus { border-color: rgba(34,197,94,.4); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
-
-#submitBtn {
-  width: 100%;
-  margin-top: .4rem;
-  background: var(--green);
-  color: #000;
-  border: none;
-  font-weight: 600;
-}
-#submitBtn:disabled { background: var(--bg4); color: var(--text3); cursor: not-allowed; }
-
-.form-msg {
-  display: none;
-  font-family: var(--mono);
-  font-size: .72rem;
-  padding: .8rem 1rem;
-  border-radius: 3px;
-  margin-top: .8rem;
-  letter-spacing: .03em;
-}
-.form-msg.success {
-  background: rgba(34,197,94,.06);
-  border: 1px solid rgba(34,197,94,.2);
-  color: var(--green);
-}
-.form-msg.error {
-  background: rgba(245,158,11,.06);
-  border: 1px solid rgba(245,158,11,.2);
-  color: var(--amber);
-}
-
-/* FOOTER */
-footer {
-  padding: 1.8rem clamp(1.5rem, 8vw, 7rem);
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  position: relative;
-  z-index: 1;
-}
-.footer-left {
-  font-family: var(--mono);
-  font-size: .7rem;
-  color: var(--text3);
-  letter-spacing: .04em;
-}
-.footer-left span { color: var(--green); }
-.footer-right {
-  font-family: var(--mono);
-  font-size: .68rem;
-  color: var(--text3);
-}
-
-/* FADE IN */
-.fade-up {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity .5s ease, transform .5s ease;
-}
-.fade-up.in { opacity: 1; transform: none; }
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .skills-layout { grid-template-columns: 1fr; }
-  .skills-group { border-right: none !important; }
-  .skills-group:last-child { border-bottom: none; }
-  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-  .blog-item { grid-template-columns: auto 1fr; }
-  .blog-meta { display: none; }
-  .hero-name { font-size: 2.6rem; }
-  .systems-grid { grid-template-columns: 1fr; }
-  .thinking-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-}
-
-/* HAMBURGER */
-#hamburger {
-  display: none;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text2);
-  font-size: 1.1rem;
-  padding: .3rem .6rem;
-  cursor: pointer;
-  border-radius: 2px;
-}
-@media (max-width: 768px) { #hamburger { display: block; } }
+@media (max-width: 760px) { .cover-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo"><span class="accent">prakhar</span>@infra:~$</div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#systems">systems</a></li>
-    <li><a href="#thinking">thinking</a></li>
-    <li><a href="#skills">stack</a></li>
-    <li><a href="#blogs">writing</a></li>
-    <li><a href="#cert">cert</a></li>
-    <li><a href="#contact">contact</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:1.2rem">
-    <div class="nav-status"><div class="status-dot"></div>open to work</div>
-    <button id="hamburger" aria-label="Menu">☰</button>
-  </div>
-</nav>
+<header class="sheet-header">
+  <span class="dwg-tag">DWG–00</span>
+  <span class="sheet-title">PRAKHAR SRIVASTAVA <span class="dim">/ DevOps & INFRA ENGINEER</span></span>
+  <nav class="sheet-nav" id="nav-links">
+    <a href="#drawings">Drawings</a>
+    <a href="#materials">Materials</a>
+    <a href="#notes">Notes</a>
+    <a href="#refs">Refs</a>
+    <a href="#seals">Seals</a>
+    <a href="#rfi">RFI</a>
+  </nav>
+  <button id="hamburger" aria-label="Menu">☰</button>
+</header>
 
-<!-- HERO -->
-<section id="hero" style="max-width:none;padding-left:clamp(1.5rem,8vw,7rem);padding-right:clamp(1.5rem,8vw,7rem);">
-  <div class="hero-inner" style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 460px;gap:5rem;align-items:center;">
-
-    <div class="fade-up">
-      <div class="hero-eyebrow">
-        <div class="status-dot"></div>
-        DevOps Engineer · Available Now
+<!-- COVER SHEET -->
+<section id="hero">
+  <div class="cover-grid">
+    <div class="reveal" style="position:relative;">
+      <div class="photo-orb">
+        <img src="data:image/jpeg;base64,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" alt="Prakhar Srivastava" class="photo-img">
+        <div class="photo-tint"></div>
       </div>
-
-      <h1 class="hero-name">
-        Prakhar<br>
-        <span class="dim">Srivastava</span>
-      </h1>
-
-      <p class="hero-tagline">
-        <span class="hl">Kubernetes</span> · <span class="hl">GitOps</span> · <span class="hl">Terraform</span> · <span class="hl">Observability</span> · <span class="hl">DevSecOps</span>
-      </p>
-
-      <p class="hero-subtext">
-        Engineer building <strong>secure cloud-native systems</strong> and infrastructure workflows. I went full-time into DevOps in March 2025 — no job lined up, just a clear plan. Since then: three production-grade infra projects, an IIT Roorkee certification, and an Automation Hero recognition among 500+ engineers.
-      </p>
-
-      <div class="hero-cta">
-        <a href="https://www.linkedin.com/in/heyyprakhar1" target="_blank" class="btn btn-solid">↗ LinkedIn</a>
-        <a href="https://github.com/Heyyprakhar1" target="_blank" class="btn btn-ghost">⌥ GitHub</a>
-        <a href="https://docs.google.com/document/d/1J7PLZIkNeMskShcYuyyd5epdziH0os6UnGC5ycXXvmM/edit?usp=sharing" target="_blank" class="btn btn-ghost">↓ Resume</a>
+      <div class="proj-label">Project</div>
+      <h1 class="cover-title">DevOps & Infra<br>Engineer</h1>
+      <p class="cover-sub">Kubernetes · GitOps · Terraform · Observability · DevSecOps</p>
+      <p class="cover-desc">Building <strong>secure, cloud-native systems</strong> and infrastructure workflows. Went full-time into DevOps in March 2025 — no job lined up, just a clear plan. Since then: four production-grade infra systems, an IIT Roorkee certification, and an Automation Hero recognition.</p>
+      <div class="cover-cta">
+        <a href="https://www.linkedin.com/in/heyyprakhar1" target="_blank" class="ref-btn">↗ LinkedIn</a>
+        <a href="https://github.com/Heyyprakhar1" target="_blank" class="ref-btn">⌥ GitHub</a>
+        <a href="https://docs.google.com/document/d/1J7PLZIkNeMskShcYuyyd5epdziH0os6UnGC5ycXXvmM/edit?usp=sharing" target="_blank" class="ref-btn">↓ Resume</a>
       </div>
-
-      <div class="hero-badge">
-        <div class="hero-badge-icon">🏆</div>
-        <div class="hero-badge-body">
-          <div class="hero-badge-title">Automation Hero — TrainWithShubham #90DaysOfDevOps</div>
-          <div class="hero-badge-desc">Recognised among <strong>500+ engineers</strong> for delivering high-impact pipeline automation adopted across the cohort. <a href="https://community.trainwithshubham.com/heroes" target="_blank" style="color:var(--green);text-decoration:none;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;">Verify ↗</a></div>
-        </div>
+      <div class="cover-meta">
+        <div class="stamp cyan">OPEN<br>TO<br>WORK</div>
+        <a href="https://community.trainwithshubham.com/heroes" target="_blank" class="cred-line">🏆 Automation Hero — TrainWithShubham · Verify ↗</a>
       </div>
     </div>
-
-    <!-- Terminal -->
-    <div class="fade-up" style="transition-delay:.15s">
-      <div class="hero-visual">
-        <div class="term-bar">
-          <div class="d d1"></div><div class="d d2"></div><div class="d d3"></div>
-          <span class="fname">system.status.json</span>
-        </div>
-        <div class="term-body">
-          <div><span class="t-p">$</span> cat system.status.json</div>
-          <div style="margin-top:.4rem;color:var(--text3)">{</div>
-          <div style="padding-left:1.2rem"><span class="t-k">"engineer"</span><span class="t-m">:</span> <span class="t-s">"Prakhar Srivastava"</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"focus"</span><span class="t-m">:</span> <span class="t-s">"cloud-native infra"</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"location"</span><span class="t-m">:</span> <span class="t-s">"Bangalore, India"</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"cert"</span><span class="t-m">:</span> <span class="t-s">"IIT Roorkee × Intellipaat"</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"systems_built"</span><span class="t-m">:</span> <span class="t-v">4</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"blog_posts"</span><span class="t-m">:</span> <span class="t-v">12</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"availability"</span><span class="t-m">:</span> <span class="t-v">OPEN_TO_WORK</span><span class="t-m">,</span></div>
-          <div style="padding-left:1.2rem"><span class="t-k">"preferred_env"</span><span class="t-m">:</span> <span class="t-s">"startup / cloud-native"</span></div>
-          <div style="color:var(--text3)">}</div>
-          <div style="margin-top:.6rem"><span class="t-p">$</span> <span class="t-blink"></span></div>
-        </div>
-      </div>
-
-      <!-- Observability mini-widget -->
-      <div style="margin-top:1rem;border:1px solid var(--border);border-radius:6px;padding:1.2rem 1.4rem;background:var(--bg3);">
-        <div style="font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.9rem;">system health</div>
-        <div style="display:flex;flex-direction:column;gap:.55rem;">
-          <div style="display:flex;align-items:center;gap:.8rem;">
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);width:7rem;flex-shrink:0;">CI pipelines</div>
-            <div style="flex:1;height:3px;background:var(--bg4);border-radius:99px;overflow:hidden;">
-              <div style="width:100%;height:100%;background:var(--green);border-radius:99px;"></div>
-            </div>
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--green);">operational</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.8rem;">
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);width:7rem;flex-shrink:0;">IaC coverage</div>
-            <div style="flex:1;height:3px;background:var(--bg4);border-radius:99px;overflow:hidden;">
-              <div style="width:85%;height:100%;background:var(--cyan);border-radius:99px;"></div>
-            </div>
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--cyan);">85%</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.8rem;">
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);width:7rem;flex-shrink:0;">sec scan rate</div>
-            <div style="flex:1;height:3px;background:var(--bg4);border-radius:99px;overflow:hidden;">
-              <div style="width:100%;height:100%;background:var(--green);border-radius:99px;"></div>
-            </div>
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--green);">100%</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.8rem;">
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--text3);width:7rem;flex-shrink:0;">vuln in prod</div>
-            <div style="flex:1;height:3px;background:var(--bg4);border-radius:99px;overflow:hidden;">
-              <div style="width:2%;height:100%;background:var(--green);border-radius:99px;"></div>
-            </div>
-            <div style="font-family:var(--mono);font-size:.65rem;color:var(--green);">zero</div>
-          </div>
-        </div>
-      </div>
+    <div class="rev-block reveal" style="transition-delay:.1s">
+      <div class="rev-head">Revisions</div>
+      <table class="rev-table">
+        <tr><th>Rev</th><th>Description</th><th>Date</th></tr>
+        <tr><td>0</td><td>BPO Operations, Concentrix</td><td>2022</td></tr>
+        <tr><td>1</td><td>DevOps transition — self-taught</td><td>Mar '25</td></tr>
+        <tr><td>2</td><td>Open to work — current</td><td>2026</td></tr>
+      </table>
     </div>
-
   </div>
 </section>
 
-<!-- INFRASTRUCTURE SYSTEMS -->
-<section id="systems">
-  <div class="section-label fade-up">01 &mdash; Featured Systems</div>
-  <p class="fade-up" style="font-size:.92rem;color:var(--text2);margin-bottom:2.5rem;max-width:520px;line-height:1.7;">Built in public. Every system below is a real operational decision made visible — not just code, but architecture, security posture, and delivery workflow.</p>
+<!-- DRAWING SET (Featured Systems) -->
+<section id="drawings">
+  <div class="sheet-label reveal">01 — Drawing Set</div>
+  <p class="section-intro reveal">Built in public. Every drawing below is a real operational decision made visible — architecture, security posture, and delivery workflow, not just code.</p>
 
-  <div class="systems-grid fade-up">
-
-    <!-- Flagship: Sentinel AI Platform -->
-    <div class="system-card flagship" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        <div>
-          <div class="system-id active">SYS-01 · Flagship · WIP</div>
-          <div style="height:.5rem"></div>
-          <div class="system-name" style="font-size:1.1rem;">Sentinel AI Platform — Conversational Analytics with Full-Stack Observability</div>
+  <!-- DWG-01 Flagship -->
+  <div class="drawing-sheet reveal" style="margin-bottom:1.4rem;">
+    <div class="reg-mark reg-tl"></div><div class="reg-mark reg-tr"></div>
+    <div class="drawing-head">
+      <span class="dwg-tag">DWG-01</span>
+      <span class="dwg-name">Sentinel AI Platform — Conversational Analytics with Full-Stack Observability</span>
+      <div class="stamp">APPROVED<br>26.06.2026</div>
+    </div>
+    <div class="drawing-body two-col">
+      <div>
+        <p class="drawing-desc">Production-grade AI analytics platform serving conversational queries over structured data — Next.js frontend, FastAPI query engine, PostgreSQL backend, fully containerised. Multi-stage Docker builds gated by Trivy scans in CI; Prometheus + Grafana + Loki wired in from deployment day one, not bolted on after. Pipeline debugged to green through build, image push, and health checks — zero unscanned artefacts ever reached production.</p>
+        <div class="spec-tags" style="margin-top:1rem;">
+          <span class="spec-tag cyan">Next.js</span>
+          <span class="spec-tag cyan">FastAPI</span>
+          <span class="spec-tag cyan">PostgreSQL</span>
+          <span class="spec-tag">Docker</span>
+          <span class="spec-tag stamp">Trivy</span>
         </div>
-
-        <!-- STAR method -->
-        <div style="display:flex;flex-direction:column;gap:.65rem;">
-          <div>
-            <div style="font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;">Situation</div>
-            <div class="system-meta">Needed a production-grade AI analytics platform that could serve conversational queries over structured data — with observability and security baked in from day one, not added later.</div>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;">Task</div>
-            <div class="system-meta">Design and ship a full-stack AI platform: Next.js frontend, FastAPI query engine, PostgreSQL backend — containerised, observable, and CI-gated before any image ships.</div>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;">Action</div>
-            <div class="system-meta">Multi-stage Docker builds with Trivy scan gates in CI. Wired Prometheus + Grafana + Loki from deployment day one — metrics, dashboards, and log aggregation operational before the first user request. CI/CD pipeline debugged to green through container build, image push, and deployment health checks.</div>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;">Result</div>
-            <div class="system-meta">Full-stack platform live with zero unscanned artefacts reaching production. Observability active from first deployment — not bolted on after the fact.</div>
-          </div>
-        </div>
-
-        <div class="system-tags">
-          <span class="tag tag-blue">Next.js</span>
-          <span class="tag tag-blue">FastAPI</span>
-          <span class="tag tag-blue">PostgreSQL</span>
-          <span class="tag tag-green">Docker</span>
-          <span class="tag tag-cyan">Prometheus</span>
-          <span class="tag tag-cyan">Grafana</span>
-          <span class="tag tag-cyan">Loki</span>
-          <span class="tag tag-amber">Trivy</span>
-        </div>
-        <a href="https://github.com/Heyyprakhar1" target="_blank" class="system-link">⌥ View on GitHub →</a>
+        <a href="https://github.com/Heyyprakhar1/sentinel-ai-platform" target="_blank" class="ref-link" style="margin-top:.8rem;">⌥ View on GitHub →</a>
       </div>
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        <div style="font-family:var(--mono);font-size:.64rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;">Delivery pipeline</div>
-        <div style="display:flex;flex-direction:column;gap:.4rem;">
-          <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">
-            <span class="wf-step green">git push</span><span class="wf-arr">→</span>
-            <span class="wf-step">Multi-stage build</span><span class="wf-arr">→</span>
-            <span class="wf-step">Trivy gate</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">
-            <span class="wf-step">Push image</span><span class="wf-arr">→</span>
-            <span class="wf-step green">Deploy</span><span class="wf-arr">→</span>
-            <span class="wf-step green">Health check</span>
-          </div>
+      <div>
+        <div class="proc-label" style="margin-bottom:.5rem;">Delivery process</div>
+        <div class="proc-strip" style="margin-bottom:1rem;">
+          <span class="proc-chip done">git push</span><span class="proc-arrow">→</span>
+          <span class="proc-chip">build</span><span class="proc-arrow">→</span>
+          <span class="proc-chip">trivy gate</span><span class="proc-arrow">→</span>
+          <span class="proc-chip done">deploy</span><span class="proc-arrow">→</span>
+          <span class="proc-chip done">health check</span>
         </div>
-        <div style="font-family:var(--mono);font-size:.64rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem;margin-bottom:.2rem;">Observability stack</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
-          <span class="tag tag-cyan">Prometheus</span>
-          <span class="tag tag-cyan">Grafana dashboards</span>
-          <span class="tag tag-cyan">Loki log aggregation</span>
+        <div class="proc-label" style="margin-bottom:.5rem;">Instrumentation</div>
+        <div class="spec-tags" style="margin-bottom:1rem;">
+          <span class="spec-tag cyan">Prometheus</span>
+          <span class="spec-tag cyan">Grafana</span>
+          <span class="spec-tag cyan">Loki</span>
         </div>
-        <div style="font-family:var(--mono);font-size:.64rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem;margin-bottom:.2rem;">Architecture decisions</div>
-        <div style="font-size:.82rem;color:var(--text2);line-height:1.7;">Observability wired from deployment day one — not retrofitted. Trivy scan gates block vulnerable images before they touch a registry. Multi-stage builds keep the production image surface minimal. FastAPI async query engine decoupled from frontend for independent scaling.</div>
+        <div class="proc-label" style="margin-bottom:.5rem;">Drawing notes</div>
+        <p class="drawing-notes">Observability wired from deployment day one — not retrofitted. Trivy gates block vulnerable images before they touch a registry. FastAPI query engine decoupled from frontend for independent scaling.</p>
       </div>
     </div>
-
-    <!-- System 2: Multi-AZ AWS (promoted) -->
-    <div class="system-card">
-      <div class="system-id">SYS-02 · Completed</div>
-      <div class="system-name">Multi-AZ AWS Infrastructure — Terraform</div>
-      <div class="workflow">
-        <span class="wf-step">terraform plan</span><span class="wf-arr">→</span>
-        <span class="wf-step">Review</span><span class="wf-arr">→</span>
-        <span class="wf-step green">apply</span>
-      </div>
-      <div class="system-meta">Production-grade 3-tier AWS stack across 2 AZs via modular Terraform. 70% faster provisioning vs manual. Private subnets, ALB ingress, IAM least-privilege, RDS with automated backups. Zero-downtime failover validated under live load.</div>
-      <div class="system-tags">
-        <span class="tag tag-green">Terraform</span>
-        <span class="tag tag-green">AWS VPC</span>
-        <span class="tag tag-blue">ALB</span>
-        <span class="tag tag-blue">ASG</span>
-        <span class="tag tag-blue">RDS</span>
-        <span class="tag tag-cyan">CloudWatch</span>
-      </div>
-      <a href="https://github.com/Heyyprakhar1/aws-media-infra-terraform" target="_blank" class="system-link">⌥ View on GitHub →</a>
-    </div>
-
-    <!-- System 3: Secure DevSecOps Pipeline -->
-    <div class="system-card">
-      <div class="system-id">SYS-03 · Completed</div>
-      <div class="system-name">Secure DevSecOps Pipeline — Two-Tier Flask App</div>
-      <div class="workflow">
-        <span class="wf-step">Commit</span><span class="wf-arr">→</span>
-        <span class="wf-step">Bandit</span><span class="wf-arr">→</span>
-        <span class="wf-step">Trivy</span><span class="wf-arr">→</span>
-        <span class="wf-step green">Deploy</span>
-      </div>
-      <div class="system-meta">6-stage shift-left CI/CD. 100% scan coverage per commit via GitHub Actions + Jenkins. Consolidated Bandit, Trivy, Gitleaks, Hadolint, pip-audit into reusable templates — 40% less maintenance overhead. Vulnerable artefact promotion rate: zero.</div>
-      <div class="system-tags">
-        <span class="tag tag-blue">GitHub Actions</span>
-        <span class="tag tag-blue">Jenkins</span>
-        <span class="tag tag-green">Docker</span>
-        <span class="tag tag-amber">Bandit</span>
-        <span class="tag tag-amber">pip-audit</span>
-      </div>
-      <a href="https://github.com/Heyyprakhar1/two-tier-app" target="_blank" class="system-link">⌥ View on GitHub →</a>
-    </div>
-
-    <!-- System 4 -->
-    <div class="system-card">
-      <div class="system-id">SYS-04 · Completed</div>
-      <div class="system-name">AWS Auto Scaling Infrastructure — Modular IaC</div>
-      <div class="workflow">
-        <span class="wf-step green">6 modules</span><span class="wf-arr">→</span>
-        <span class="wf-step">28 resources</span><span class="wf-arr">→</span>
-        <span class="wf-step green">single apply</span>
-      </div>
-      <div class="system-meta">VPC, ALB, ASG, RDS, Security Groups, CloudWatch across 6 Terraform modules. Least-privilege SG chaining (ALB → EC2 → RDS). CPU-based auto scaling with CloudWatch alarms. Zero-downtime, production-grade infra.</div>
-      <div class="system-tags">
-        <span class="tag tag-green">Terraform</span>
-        <span class="tag tag-green">Modular IaC</span>
-        <span class="tag tag-blue">EC2 ASG</span>
-        <span class="tag tag-cyan">CloudWatch</span>
-        <span class="tag tag-blue">RDS MySQL</span>
-      </div>
-      <a href="https://github.com/Heyyprakhar1/aws-autoscaling-infra" target="_blank" class="system-link">⌥ View on GitHub →</a>
-    </div>
-
-    <!-- System 5 -->
-    <div class="system-card">
-      <div class="system-id">SYS-05 · Starting Soon</div>
-      <div class="system-name">AWS 3-Tier HA Architecture — Interactive Diagram</div>
-      <div class="system-meta">Interactive visual explainer for Cross-AZ Highly Available AWS architecture. Covers Region/AZ/VPC/Subnet concepts with animated traffic flow. Built with React + Vite, deployed on Netlify.</div>
-      <div class="system-tags">
-        <span class="tag tag-green">React</span>
-        <span class="tag tag-green">Cross-AZ HA</span>
-        <span class="tag tag-blue">RDS Multi-AZ</span>
-        <span class="tag tag-amber">Netlify</span>
-      </div>
-      <a href="https://nimble-tarsier-b506a3.netlify.app/" target="_blank" class="system-link">↗ Live Demo →</a>
-    </div>
-
   </div>
-</section>
 
-<!-- OPERATIONAL THINKING -->
-<section id="thinking">
-  <div class="section-label fade-up">02 &mdash; Operational Thinking</div>
-  <p class="fade-up" style="font-size:.92rem;color:var(--text2);margin-bottom:2.5rem;max-width:480px;line-height:1.7;">How I approach infrastructure decisions. These aren't preferences — they're principles I've arrived at by building systems that have to actually work.</p>
-
-  <div class="thinking-grid">
-
-    <div class="thinking-card fade-up">
-      <div class="thinking-icon">// OBSERVABILITY_FIRST</div>
-      <div class="thinking-title">Instrument before you ship</div>
-      <div class="thinking-body">If you can't measure it, you can't operate it. Metrics, logs, and traces belong in the design phase — not bolted on after the first incident at 3am.</div>
-    </div>
-
-    <div class="thinking-card fade-up">
-      <div class="thinking-icon">// GITOPS_OVER_DRIFT</div>
-      <div class="thinking-title">Git is the source of truth</div>
-      <div class="thinking-body">Every production change should trace to a commit. Drift is a silent failure mode. ArgoCD and declarative manifests remove the ambiguity between what's deployed and what's intended.</div>
-    </div>
-
-    <div class="thinking-card fade-up">
-      <div class="thinking-icon">// SECURITY_INTEGRATED</div>
-      <div class="thinking-title">Shift security left, not later</div>
-      <div class="thinking-body">Security gates at commit time cost milliseconds. Security gates at production cost customers. Bandit, Trivy, Gitleaks — all run before any artefact touches a registry.</div>
-    </div>
-
-    <div class="thinking-card fade-up">
-      <div class="thinking-icon">// IaC_OVER_CONSOLE</div>
-      <div class="thinking-title">Infrastructure is code, not clicks</div>
-      <div class="thinking-body">The AWS console is for exploration. Production infrastructure lives in Terraform — versioned, reviewed, and reproducible. Remote state and modules are non-negotiable past project one.</div>
-    </div>
-
-    <div class="thinking-card fade-up">
-      <div class="thinking-icon">// AUTOMATE_REPETITION</div>
-      <div class="thinking-title">If you do it twice, automate it</div>
-      <div class="thinking-body">Manual steps are incidents waiting to happen. Pipeline templates, reusable modules, and documented runbooks turn tribal knowledge into reproducible systems.</div>
-    </div>
-
-    <div class="thinking-card fade-up">
-      <div class="thinking-icon">// LEAST_PRIVILEGE</div>
-      <div class="thinking-title">Deny by default, grant explicitly</div>
-      <div class="thinking-body">IAM roles, security group chaining, namespace isolation — every system I build assumes breach. Blast radius minimisation is an architectural decision, not a compliance checkbox.</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label fade-up">03 &mdash; Infra Stack</div>
-
-  <div class="skills-layout fade-up">
-    <div class="skills-group">
-      <div class="sg-label">Cloud</div>
-      <div class="sg-items">
-        <span class="tag tag-default">AWS EC2</span>
-        <span class="tag tag-default">VPC</span>
-        <span class="tag tag-default">RDS</span>
-        <span class="tag tag-default">ALB</span>
-        <span class="tag tag-default">ASG</span>
-        <span class="tag tag-default">IAM</span>
-        <span class="tag tag-default">S3</span>
-        <span class="tag tag-default">ECR</span>
-        <span class="tag tag-default">ECS</span>
-        <span class="tag tag-default">SNS</span>
+  <!-- DWG-02/03/04 -->
+  <div class="drawings-grid">
+    <div class="drawing-sheet reveal">
+      <div class="drawing-head"><span class="dwg-tag">DWG-02</span><span class="dwg-name">Multi-AZ AWS Infrastructure</span></div>
+      <div class="drawing-body">
+        <div class="proc-strip">
+          <span class="proc-chip">plan</span><span class="proc-arrow">→</span>
+          <span class="proc-chip">review</span><span class="proc-arrow">→</span>
+          <span class="proc-chip done">apply</span>
+        </div>
+        <p class="drawing-desc">Production-grade 3-tier AWS stack across 2 AZs via modular Terraform. 70% faster provisioning vs manual. Private subnets, ALB ingress, IAM least-privilege, RDS with automated backups. Zero-downtime failover validated under live load.</p>
+        <div class="spec-tags">
+          <span class="spec-tag cyan">Terraform</span>
+          <span class="spec-tag">AWS VPC</span>
+          <span class="spec-tag">ALB</span>
+          <span class="spec-tag">ASG</span>
+          <span class="spec-tag">RDS</span>
+        </div>
+        <a href="https://github.com/Heyyprakhar1/aws-media-infra-terraform" target="_blank" class="ref-link">⌥ View on GitHub →</a>
       </div>
     </div>
 
-    <div class="skills-group">
-      <div class="sg-label">Infrastructure as Code</div>
-      <div class="sg-items">
-        <span class="tag tag-green">Terraform</span>
-        <span class="tag tag-green">Modules</span>
-        <span class="tag tag-green">Remote State</span>
-        <span class="tag tag-green">Workspaces</span>
-        <span class="tag tag-default">CloudFormation</span>
+    <div class="drawing-sheet reveal">
+      <div class="drawing-head"><span class="dwg-tag">DWG-03</span><span class="dwg-name">Secure DevSecOps Pipeline</span></div>
+      <div class="drawing-body">
+        <div class="proc-strip">
+          <span class="proc-chip">commit</span><span class="proc-arrow">→</span>
+          <span class="proc-chip">bandit</span><span class="proc-arrow">→</span>
+          <span class="proc-chip">trivy</span><span class="proc-arrow">→</span>
+          <span class="proc-chip done">deploy</span>
+        </div>
+        <p class="drawing-desc">6-stage shift-left CI/CD for a two-tier Flask app. 100% scan coverage per commit via GitHub Actions + Jenkins. Bandit, Trivy, Gitleaks, Hadolint, pip-audit consolidated into reusable templates — 40% less maintenance overhead. Vulnerable artefact promotion rate: zero.</p>
+        <div class="spec-tags">
+          <span class="spec-tag">GitHub Actions</span>
+          <span class="spec-tag">Jenkins</span>
+          <span class="spec-tag">Docker</span>
+          <span class="spec-tag stamp">Bandit</span>
+          <span class="spec-tag stamp">pip-audit</span>
+        </div>
+        <a href="https://github.com/Heyyprakhar1/two-tier-app" target="_blank" class="ref-link">⌥ View on GitHub →</a>
       </div>
     </div>
 
-    <div class="skills-group">
-      <div class="sg-label">Containers &amp; Orchestration</div>
-      <div class="sg-items">
-        <span class="tag tag-blue">Docker</span>
-        <span class="tag tag-blue">Kubernetes</span>
-        <span class="tag tag-blue">Helm</span>
-        <span class="tag tag-blue">kind</span>
-        <span class="tag tag-blue">kubectl</span>
-        <span class="tag tag-default">Docker Compose</span>
-        <span class="tag tag-default">Nginx</span>
-      </div>
-    </div>
-
-    <div class="skills-group">
-      <div class="sg-label">CI/CD &amp; GitOps</div>
-      <div class="sg-items">
-        <span class="tag tag-cyan">GitHub Actions</span>
-        <span class="tag tag-cyan">Jenkins</span>
-        <span class="tag tag-cyan">ArgoCD</span>
-        <span class="tag tag-default">Git</span>
-      </div>
-    </div>
-
-    <div class="skills-group">
-      <div class="sg-label">Observability</div>
-      <div class="sg-items">
-        <span class="tag tag-default">Prometheus</span>
-        <span class="tag tag-default">Grafana</span>
-        <span class="tag tag-default">Loki</span>
-        <span class="tag tag-default">Promtail</span>
-        <span class="tag tag-default">CloudWatch</span>
-      </div>
-    </div>
-
-    <div class="skills-group">
-      <div class="sg-label">Security &amp; Scanning</div>
-      <div class="sg-items">
-        <span class="tag tag-amber">Trivy</span>
-        <span class="tag tag-amber">Bandit</span>
-        <span class="tag tag-amber">Gitleaks</span>
-        <span class="tag tag-amber">Hadolint</span>
-        <span class="tag tag-amber">pip-audit</span>
-      </div>
-    </div>
-
-    <div class="skills-group">
-      <div class="sg-label">Networking</div>
-      <div class="sg-items">
-        <span class="tag tag-default">VPC Design</span>
-        <span class="tag tag-default">Subnetting</span>
-        <span class="tag tag-default">NAT Gateway</span>
-        <span class="tag tag-default">Security Groups</span>
-        <span class="tag tag-default">Route Tables</span>
-      </div>
-    </div>
-
-    <div class="skills-group">
-      <div class="sg-label">OS &amp; Scripting</div>
-      <div class="sg-items">
-        <span class="tag tag-green">Linux / Ubuntu</span>
-        <span class="tag tag-green">Bash</span>
-        <span class="tag tag-default">Ansible</span>
-        <span class="tag tag-default">Python (basic)</span>
+    <div class="drawing-sheet reveal">
+      <div class="drawing-head"><span class="dwg-tag">DWG-04</span><span class="dwg-name">AWS Auto Scaling Infrastructure</span></div>
+      <div class="drawing-body">
+        <div class="proc-strip">
+          <span class="proc-chip done">6 modules</span><span class="proc-arrow">→</span>
+          <span class="proc-chip">28 resources</span><span class="proc-arrow">→</span>
+          <span class="proc-chip done">single apply</span>
+        </div>
+        <p class="drawing-desc">VPC, ALB, ASG, RDS, Security Groups, CloudWatch across 6 Terraform modules. Least-privilege SG chaining (ALB → EC2 → RDS). CPU-based auto scaling with CloudWatch alarms. Zero-downtime, production-grade infra.</p>
+        <div class="spec-tags">
+          <span class="spec-tag cyan">Terraform</span>
+          <span class="spec-tag">EC2 ASG</span>
+          <span class="spec-tag">CloudWatch</span>
+          <span class="spec-tag">RDS MySQL</span>
+        </div>
+        <a href="https://github.com/Heyyprakhar1/aws-autoscaling-infra" target="_blank" class="ref-link">⌥ View on GitHub →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CURRENTLY EXPLORING -->
-<section id="exploring">
-  <div class="section-label fade-up">04 &mdash; Currently Exploring</div>
+<!-- FIELD NOTES (Operational Thinking) -->
+<section id="notes">
+  <div class="sheet-label reveal">02 — Field Notes</div>
+  <p class="section-intro reveal">How I approach infrastructure decisions. Not preferences — principles arrived at by building systems that have to actually work.</p>
+  <div class="notes-grid reveal">
+    <div class="note">
+      <span class="note-no">01</span>
+      <div class="note-body"><strong>Instrument before you ship.</strong>If you can't measure it, you can't operate it. Metrics, logs, and traces belong in the design phase — not bolted on after the first 3am incident.</div>
+    </div>
+    <div class="note">
+      <span class="note-no">02</span>
+      <div class="note-body"><strong>Git is the source of truth.</strong>Every production change traces to a commit. Drift is a silent failure mode. ArgoCD removes the ambiguity between deployed and intended.</div>
+    </div>
+    <div class="note">
+      <span class="note-no">03</span>
+      <div class="note-body"><strong>Shift security left, not later.</strong>Gates at commit time cost milliseconds. Gates at production cost customers. Bandit, Trivy, Gitleaks — all run before any artefact touches a registry.</div>
+    </div>
+    <div class="note">
+      <span class="note-no">04</span>
+      <div class="note-body"><strong>Infrastructure is code, not clicks.</strong>The console is for exploration. Production infra lives in Terraform — versioned, reviewed, reproducible.</div>
+    </div>
+    <div class="note">
+      <span class="note-no">05</span>
+      <div class="note-body"><strong>If you do it twice, automate it.</strong>Manual steps are incidents waiting to happen. Pipeline templates turn tribal knowledge into reproducible systems.</div>
+    </div>
+    <div class="note">
+      <span class="note-no">06</span>
+      <div class="note-body"><strong>Deny by default, grant explicitly.</strong>IAM roles, SG chaining, namespace isolation — every system assumes breach. Blast-radius minimisation is architecture, not a checkbox.</div>
+    </div>
+  </div>
+</section>
 
-  <div class="explore-list fade-up">
-    <div class="explore-item">
-      <div class="explore-num">01</div>
-      <div class="explore-content">
-        <div class="explore-topic">AI infrastructure workflows</div>
-        <div class="explore-note">Inference serving, model registries, GPU scheduling on Kubernetes</div>
+<!-- BILL OF MATERIALS (Skills) -->
+<section id="materials">
+  <div class="sheet-label reveal">03 — Bill of Materials</div>
+  <div class="bom-wrap reveal">
+    <div class="bom-title-row"><span>Item</span><span>Category</span><span>Components</span></div>
+
+    <div class="bom-row">
+      <span class="bom-no">01</span><span class="bom-cat">Cloud</span>
+      <div class="bom-items">
+        <span class="spec-tag">EC2</span><span class="spec-tag">VPC</span><span class="spec-tag">RDS</span><span class="spec-tag">ALB</span><span class="spec-tag">ASG</span><span class="spec-tag">IAM</span><span class="spec-tag">S3</span><span class="spec-tag">ECR</span><span class="spec-tag">ECS</span><span class="spec-tag">SNS</span>
       </div>
     </div>
-    <div class="explore-item">
-      <div class="explore-num">02</div>
-      <div class="explore-content">
-        <div class="explore-topic">Kubernetes networking internals</div>
-        <div class="explore-note">CNI plugins, eBPF, network policies, service mesh fundamentals</div>
+    <div class="bom-row">
+      <span class="bom-no">02</span><span class="bom-cat">Infrastructure as Code</span>
+      <div class="bom-items">
+        <span class="spec-tag cyan">Terraform</span><span class="spec-tag cyan">Modules</span><span class="spec-tag cyan">Remote State</span><span class="spec-tag cyan">Workspaces</span><span class="spec-tag">CloudFormation</span>
       </div>
     </div>
-    <div class="explore-item">
-      <div class="explore-num">03</div>
-      <div class="explore-content">
-        <div class="explore-topic">OPA / Gatekeeper policy enforcement</div>
-        <div class="explore-note">Admission control, Rego policies, cluster-wide guardrails</div>
+    <div class="bom-row">
+      <span class="bom-no">03</span><span class="bom-cat">Containers &amp; Orchestration</span>
+      <div class="bom-items">
+        <span class="spec-tag cyan">Docker</span><span class="spec-tag cyan">Kubernetes</span><span class="spec-tag">Helm</span><span class="spec-tag">kind</span><span class="spec-tag">kubectl</span><span class="spec-tag">Docker Compose</span><span class="spec-tag">Nginx</span>
       </div>
     </div>
-    <div class="explore-item">
-      <div class="explore-num">04</div>
-      <div class="explore-content">
-        <div class="explore-topic">Observability-first backend systems</div>
-        <div class="explore-note">OpenTelemetry, distributed tracing, SLO-based alerting</div>
+    <div class="bom-row">
+      <span class="bom-no">04</span><span class="bom-cat">CI/CD &amp; GitOps</span>
+      <div class="bom-items">
+        <span class="spec-tag cyan">GitHub Actions</span><span class="spec-tag cyan">Jenkins</span><span class="spec-tag cyan">ArgoCD</span><span class="spec-tag">Git</span>
       </div>
     </div>
-    <div class="explore-item">
-      <div class="explore-num">05</div>
-      <div class="explore-content">
-        <div class="explore-topic">Platform engineering practices</div>
-        <div class="explore-note">Internal developer platforms, golden paths, self-service infra</div>
+    <div class="bom-row">
+      <span class="bom-no">05</span><span class="bom-cat">Observability</span>
+      <div class="bom-items">
+        <span class="spec-tag cyan">Prometheus</span><span class="spec-tag cyan">Grafana</span><span class="spec-tag cyan">Loki</span><span class="spec-tag cyan">Promtail</span><span class="spec-tag cyan">CloudWatch</span>
+      </div>
+    </div>
+    <div class="bom-row">
+      <span class="bom-no">06</span><span class="bom-cat">Security &amp; Scanning</span>
+      <div class="bom-items">
+        <span class="spec-tag stamp">Trivy</span><span class="spec-tag stamp">Bandit</span><span class="spec-tag stamp">Gitleaks</span><span class="spec-tag stamp">Hadolint</span><span class="spec-tag stamp">pip-audit</span>
+      </div>
+    </div>
+    <div class="bom-row">
+      <span class="bom-no">07</span><span class="bom-cat">Networking</span>
+      <div class="bom-items">
+        <span class="spec-tag">VPC Design</span><span class="spec-tag">Subnetting</span><span class="spec-tag">NAT Gateway</span><span class="spec-tag">Security Groups</span><span class="spec-tag">Route Tables</span>
+      </div>
+    </div>
+    <div class="bom-row">
+      <span class="bom-no">08</span><span class="bom-cat">OS &amp; Scripting</span>
+      <div class="bom-items">
+        <span class="spec-tag cyan">Linux / Ubuntu</span><span class="spec-tag cyan">Bash</span><span class="spec-tag">Ansible</span><span class="spec-tag">Python (basic)</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WRITING -->
-<section id="blogs">
-  <div class="section-label fade-up">05 &mdash; Technical Writing</div>
-  <p class="fade-up" style="font-size:.92rem;color:var(--text2);margin-bottom:2.5rem;max-width:480px;line-height:1.7;">Not tutorials. Real problems encountered while building, written down while they were still fresh.</p>
+<!-- R&D LOG (Currently Exploring) -->
+<section id="rd">
+  <div class="sheet-label reveal">04 — R&amp;D Log</div>
+  <div class="rd-list reveal">
+    <div class="rd-item"><span class="rd-no">01</span><div><div class="rd-topic">AI infrastructure workflows</div><div class="rd-note">Inference serving, model registries, GPU scheduling on Kubernetes</div></div></div>
+    <div class="rd-item"><span class="rd-no">02</span><div><div class="rd-topic">Kubernetes networking internals</div><div class="rd-note">CNI plugins, eBPF, network policies, service mesh fundamentals</div></div></div>
+    <div class="rd-item"><span class="rd-no">03</span><div><div class="rd-topic">OPA / Gatekeeper policy enforcement</div><div class="rd-note">Admission control, Rego policies, cluster-wide guardrails</div></div></div>
+    <div class="rd-item"><span class="rd-no">04</span><div><div class="rd-topic">Observability-first backend systems</div><div class="rd-note">OpenTelemetry, distributed tracing, SLO-based alerting</div></div></div>
+    <div class="rd-item"><span class="rd-no">05</span><div><div class="rd-topic">Platform engineering practices</div><div class="rd-note">Internal developer platforms, golden paths, self-service infra</div></div></div>
+  </div>
+</section>
 
-  <div class="blogs-list fade-up">
-
-    <a href="https://heyyprakhar01.hashnode.dev/the-app-ran-the-data-didn-t-survive" target="_blank" class="blog-item">
-      <div class="blog-num">01</div>
-      <div class="blog-content">
-        <div class="blog-title">The app ran. The data didn't survive.</div>
-        <div class="blog-desc">What Kubernetes PVCs actually do — learned the hard way when 5 healthy pods silently ate all my data on restart.</div>
-      </div>
-      <div class="blog-meta">12 min · Kubernetes</div>
+<!-- REFERENCE DOCUMENTS (Blogs) -->
+<section id="refs">
+  <div class="sheet-label reveal">05 — Reference Documents</div>
+  <p class="section-intro reveal">Not tutorials. Real problems encountered while building, written down while they were still fresh.</p>
+  <div class="refs-list reveal">
+    <a href="https://heyyprakhar01.hashnode.dev/the-app-ran-the-data-didn-t-survive" target="_blank" class="ref-item">
+      <span class="ref-no">01</span>
+      <div><div class="ref-title">The app ran. The data didn't survive.</div><div class="ref-desc">What Kubernetes PVCs actually do — learned the hard way when 5 healthy pods silently ate all my data on restart.</div></div>
+      <span class="ref-meta">12 min · K8s</span>
     </a>
-
-    <a href="https://heyyprakhar01.hashnode.dev/variables-outputs-remote-state-and-the-terraform-features-that-actually-matter-in-production" target="_blank" class="blog-item">
-      <div class="blog-num">02</div>
-      <div class="blog-content">
-        <div class="blog-title">Variables, Outputs, Remote State — Terraform features that matter in production</div>
-        <div class="blog-desc">Why hardcoding everything works until it doesn't — and how remote state changed how I think about infra.</div>
-      </div>
-      <div class="blog-meta">11 min · Terraform</div>
+    <a href="https://heyyprakhar01.hashnode.dev/variables-outputs-remote-state-and-the-terraform-features-that-actually-matter-in-production" target="_blank" class="ref-item">
+      <span class="ref-no">02</span>
+      <div><div class="ref-title">Variables, Outputs, Remote State — Terraform features that matter in production</div><div class="ref-desc">Why hardcoding everything works until it doesn't — and how remote state changed how I think about infra.</div></div>
+      <span class="ref-meta">11 min · Terraform</span>
     </a>
-
-    <a href="https://heyyprakhar01.hashnode.dev/providers-state-and-building-real-aws-infrastructure-with-terraform" target="_blank" class="blog-item">
-      <div class="blog-num">03</div>
-      <div class="blog-content">
-        <div class="blog-title">Providers, State, and Building Real AWS Infrastructure with Terraform</div>
-        <div class="blog-desc">The moment I stopped clicking through the AWS console. What state files actually are and why they matter.</div>
-      </div>
-      <div class="blog-meta">11 min · AWS · IaC</div>
+    <a href="https://heyyprakhar01.hashnode.dev/providers-state-and-building-real-aws-infrastructure-with-terraform" target="_blank" class="ref-item">
+      <span class="ref-no">03</span>
+      <div><div class="ref-title">Providers, State, and Building Real AWS Infrastructure with Terraform</div><div class="ref-desc">The moment I stopped clicking through the AWS console. What state files actually are and why they matter.</div></div>
+      <span class="ref-meta">11 min · AWS</span>
     </a>
-
-    <a href="https://heyyprakhar01.hashnode.dev/infrastructure-as-code-iac-with-terraform-from-concept-to-first-infrastructure" target="_blank" class="blog-item">
-      <div class="blog-num">04</div>
-      <div class="blog-content">
-        <div class="blog-title">Infrastructure as Code with Terraform: From Concept to First Infrastructure</div>
-        <div class="blog-desc">From clicking dashboards to declarative infrastructure you can version, review, and destroy safely.</div>
-      </div>
-      <div class="blog-meta">4 min · Terraform</div>
+    <a href="https://heyyprakhar01.hashnode.dev/infrastructure-as-code-iac-with-terraform-from-concept-to-first-infrastructure" target="_blank" class="ref-item">
+      <span class="ref-no">04</span>
+      <div><div class="ref-title">Infrastructure as Code with Terraform: From Concept to First Infrastructure</div><div class="ref-desc">From clicking dashboards to declarative infrastructure you can version, review, and destroy safely.</div></div>
+      <span class="ref-meta">4 min · Terraform</span>
     </a>
-
-    <a href="https://heyyprakhar01.hashnode.dev/from-servers-to-cloud-how-i-finally-understood-the-basics-of-aws" target="_blank" class="blog-item">
-      <div class="blog-num">05</div>
-      <div class="blog-content">
-        <div class="blog-title">From Servers to Cloud: How I Finally Understood the Basics of AWS</div>
-        <div class="blog-desc">What "deploy to the cloud" actually means — without the buzzwords that confused me at the start.</div>
-      </div>
-      <div class="blog-meta">4 min · AWS</div>
+    <a href="https://heyyprakhar01.hashnode.dev/from-servers-to-cloud-how-i-finally-understood-the-basics-of-aws" target="_blank" class="ref-item">
+      <span class="ref-no">05</span>
+      <div><div class="ref-title">From Servers to Cloud: How I Finally Understood the Basics of AWS</div><div class="ref-desc">What "deploy to the cloud" actually means — without the buzzwords that confused me at the start.</div></div>
+      <span class="ref-meta">4 min · AWS</span>
     </a>
-
   </div>
+  <div class="reveal" style="margin-top:1.4rem;"><a href="https://heyyprakhar01.hashnode.dev" target="_blank" class="ref-btn">→ All posts on Hashnode</a></div>
+</section>
 
-  <div style="margin-top:1.5rem" class="fade-up">
-    <a href="https://heyyprakhar01.hashnode.dev" target="_blank" class="btn btn-ghost">→ All posts on Hashnode</a>
+<!-- SEALS (Certification) -->
+<section id="seals">
+  <div class="sheet-label reveal">06 — Certified</div>
+  <div class="seals-wrap reveal">
+    <div class="seal-block">
+      <div class="seal-head">
+        <div class="seal-ring">✓</div>
+        <div><div class="seal-name">Advanced Cloud &amp; DevOps Program</div><div class="seal-org">IIT Roorkee × Intellipaat — iHUB DivyaSampark</div></div>
+      </div>
+      <p class="seal-desc">Covers AWS, Kubernetes, Terraform, CI/CD pipelines, and DevSecOps workflows. Issued by IIT Roorkee's Technology Innovation Hub — an engineering program, not a vendor certificate.</p>
+      <div class="seal-detail">
+        <span class="seal-id">ID: IPTIH26030271 · Completed 2026</span>
+        <a href="https://tih.iitr.ac.in/certificate/intellipaat/IPTIH26030271.jpg" target="_blank" class="seal-verify">Verify →</a>
+      </div>
+    </div>
+    <div class="seal-block">
+      <div class="seal-head">
+        <div class="seal-ring">✓</div>
+        <div><div class="seal-name">GitHub Actions &amp; Kubernetes Masterclass</div><div class="seal-org">TrainWithShubham — CertDirectory</div></div>
+      </div>
+      <p class="seal-desc">Hands-on masterclass covering GitHub Actions CI/CD pipelines, Kubernetes orchestration, and GitOps delivery workflows — completed under real project constraints as part of the #90DaysOfDevOps cohort.</p>
+      <div class="seal-detail">
+        <span class="seal-id">ID: CRD-DEMEF6VC · TrainWithShubham</span>
+        <a href="https://credentials.certdirectory.io/verify/CRD-DEMEF6VC" target="_blank" class="seal-verify">Verify →</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CERTIFICATION -->
-<section id="cert">
-  <div class="section-label fade-up">06 &mdash; Certification</div>
-
-  <div style="display:flex;flex-direction:column;gap:1rem;max-width:640px;">
-
-    <div class="cert-block fade-up">
-      <div class="cert-header">
-        <div class="cert-icon">🎓</div>
-        <div>
-          <div class="cert-name">Advanced Cloud &amp; DevOps Program</div>
-          <div class="cert-org">IIT Roorkee × Intellipaat — iHUB DivyaSampark</div>
-        </div>
-      </div>
-      <div style="font-size:.85rem;color:var(--text2);line-height:1.7;">Covers AWS, Kubernetes, Terraform, CI/CD pipelines, and DevSecOps workflows. Issued by IIT Roorkee's Technology Innovation Hub — not a vendor certificate, an engineering program.</div>
-      <div class="cert-detail">
-        <div class="cert-id">ID: IPTIH26030271 · Completed 2025</div>
-        <a href="https://tih.iitr.ac.in/certificate/intellipaat/IPTIH26030271.jpg" target="_blank" class="cert-link">✓ Verify →</a>
+<!-- RFI (Contact) -->
+<section id="rfi">
+  <div class="sheet-label reveal">07 — Request for Information</div>
+  <div class="rfi-grid">
+    <div class="reveal">
+      <h2 class="rfi-title">Let's talk<br>infrastructure.</h2>
+      <p class="rfi-sub">Looking for a <strong>DevOps or Infrastructure Engineer role</strong> where I can contribute from day one. Give me a take-home task. Startups, cloud-native teams, companies that take <strong>shift-left security seriously</strong> — that's exactly where I want to be.</p>
+      <div class="rfi-links">
+        <a href="mailto:srivprak0106@gmail.com" class="rfi-link"><span class="rfi-icon">@</span><div><span class="rfi-label">Email</span><span class="rfi-val">srivprak0106@gmail.com</span></div></a>
+        <a href="https://www.linkedin.com/in/heyyprakhar1" target="_blank" class="rfi-link"><span class="rfi-icon">in</span><div><span class="rfi-label">LinkedIn</span><span class="rfi-val">linkedin.com/in/heyyprakhar1</span></div></a>
+        <a href="https://github.com/Heyyprakhar1" target="_blank" class="rfi-link"><span class="rfi-icon">⌥</span><div><span class="rfi-label">GitHub</span><span class="rfi-val">github.com/Heyyprakhar1</span></div></a>
+        <a href="https://heyyprakhar01.hashnode.dev" target="_blank" class="rfi-link"><span class="rfi-icon">#</span><div><span class="rfi-label">Blog</span><span class="rfi-val">heyyprakhar01.hashnode.dev</span></div></a>
+        <a href="https://www.instagram.com/theinfrajourney_/" target="_blank" class="rfi-link"><span class="rfi-icon">IG</span><div><span class="rfi-label">Instagram</span><span class="rfi-val">@theinfrajourney_</span></div></a>
       </div>
     </div>
-
-    <div class="cert-block fade-up">
-      <div class="cert-header">
-        <div class="cert-icon">🏅</div>
-        <div>
-          <div class="cert-name">GitHub Actions &amp; Kubernetes Masterclass</div>
-          <div class="cert-org">TrainWithShubham — CertDirectory</div>
-        </div>
-      </div>
-      <div style="font-size:.85rem;color:var(--text2);line-height:1.7;">Hands-on masterclass covering GitHub Actions CI/CD pipelines, Kubernetes orchestration, and GitOps delivery workflows — completed under real project constraints as part of the #90DaysOfDevOps cohort.</div>
-      <div class="cert-detail">
-        <div class="cert-id">ID: CRD-DEMEF6VC · TrainWithShubham</div>
-        <a href="https://credentials.certdirectory.io/verify/CRD-DEMEF6VC" target="_blank" class="cert-link">✓ Verify →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label fade-up">07 &mdash; Contact</div>
-
-  <div class="contact-layout">
-    <div class="fade-up">
-      <div class="avail"><div class="status-dot"></div>Available immediately</div>
-      <h2 class="contact-head">Let's talk<br>infrastructure.</h2>
-      <p class="contact-sub">
-        Looking for a <strong>DevOps or Infrastructure Engineer role</strong> where I can contribute from day one. Give me a take-home task. Startups, cloud-native teams, companies that take <strong>shift-left security seriously</strong> — that's exactly where I want to be.
-      </p>
-
-      <div class="contact-links">
-        <a href="mailto:srivprak0106@gmail.com" class="contact-link">
-          <span class="cl-icon">@</span>
-          <div><span class="cl-label">Email</span><span class="cl-val">srivprak0106@gmail.com</span></div>
-        </a>
-        <a href="https://www.linkedin.com/in/heyyprakhar1" target="_blank" class="contact-link">
-          <span class="cl-icon">in</span>
-          <div><span class="cl-label">LinkedIn</span><span class="cl-val">linkedin.com/in/heyyprakhar1</span></div>
-        </a>
-        <a href="https://github.com/Heyyprakhar1" target="_blank" class="contact-link">
-          <span class="cl-icon">⌥</span>
-          <div><span class="cl-label">GitHub</span><span class="cl-val">github.com/Heyyprakhar1</span></div>
-        </a>
-        <a href="https://heyyprakhar01.hashnode.dev" target="_blank" class="contact-link">
-          <span class="cl-icon">#</span>
-          <div><span class="cl-label">Blog</span><span class="cl-val">heyyprakhar01.hashnode.dev</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="fade-up" style="transition-delay:.1s">
-      <form id="contactForm">
+    <div class="reveal" style="transition-delay:.1s">
+      <form id="rfiForm" class="rfi-form">
         <input type="hidden" name="access_key" value="6ac14ef3-58c9-4a27-b5af-10dd557d089e" />
         <input type="hidden" name="subject" value="Portfolio inquiry — Prakhar Srivastava" />
         <input type="checkbox" name="botcheck" style="display:none" />
-
-        <div class="form-row">
-          <div class="form-field">
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Your name" required />
-          </div>
-          <div class="form-field">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="your@email.com" required />
-          </div>
+        <div class="rfi-row">
+          <div class="form-field"><label>Name</label><input type="text" name="name" placeholder="Your name" required /></div>
+          <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required /></div>
         </div>
-
-        <div class="form-field">
-          <label>Subject</label>
-          <input type="text" name="subject_user" placeholder="Job opportunity / Freelance / Collaboration" />
-        </div>
-
-        <div class="form-field">
-          <label>Message</label>
-          <textarea name="message" rows="5" placeholder="Tell me about the role, the team, or what you're building..." required></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn" class="btn btn-solid">→ Send Message</button>
-
-        <div id="successMsg" class="form-msg success">✓ Message sent. I'll get back to you shortly.</div>
-        <div id="errorMsg" class="form-msg error">✗ Something went wrong. Try emailing directly.</div>
+        <div class="form-field"><label>Subject</label><input type="text" name="subject_user" placeholder="Job opportunity / Freelance / Collaboration" /></div>
+        <div class="form-field"><label>Message</label><textarea name="message" rows="5" placeholder="Tell me about the role, the team, or what you're building..." required></textarea></div>
+        <button type="submit" id="rfiSubmit">→ Send Message</button>
+        <div id="rfiSuccess" class="rfi-msg success">✓ Message sent. I'll get back to you shortly.</div>
+        <div id="rfiError" class="rfi-msg error">✗ Something went wrong. Try emailing directly.</div>
       </form>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-left">prakhar<span>@infra</span>:~$ Building in public since March 2025.</div>
-  <div class="footer-right">© 2026 Prakhar Srivastava</div>
+<footer class="title-block">
+  <span>DRAWN: P. SRIVASTAVA — Building in public since March 2025</span>
+  <span>SHEET 1 OF 1</span>
+  <span>© 2026 Prakhar Srivastava</span>
 </footer>
 
 <script>
-// Scroll fade-up
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 60);
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Mobile nav
 document.getElementById('hamburger').addEventListener('click', () => {
   const nav = document.getElementById('nav-links');
-  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-  if (nav.style.display === 'flex') {
+  const open = nav.style.display === 'flex';
+  nav.style.display = open ? 'none' : 'flex';
+  if (!open) {
     Object.assign(nav.style, {
-      position: 'absolute', top: '56px', left: '0', right: '0',
-      flexDirection: 'column', background: 'var(--bg)',
-      borderBottom: '1px solid var(--border)',
-      padding: '1rem 2rem', gap: '1rem', zIndex: '99'
+      position: 'absolute', top: '52px', left: '0', right: '0',
+      flexDirection: 'column', background: 'var(--bg2)',
+      borderBottom: '1px solid var(--grid2)',
+      padding: '1rem 1.5rem', gap: '.9rem', zIndex: '99'
     });
   }
 });
 
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
+document.getElementById('rfiForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  const ok = document.getElementById('successMsg');
-  const err = document.getElementById('errorMsg');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
+  const btn = document.getElementById('rfiSubmit');
+  const ok = document.getElementById('rfiSuccess');
+  const err = document.getElementById('rfiError');
+  btn.disabled = true; btn.textContent = 'Sending...';
   try {
     const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
     const json = await res.json();
-    if (json.success) {
-      ok.style.display = 'block'; err.style.display = 'none';
-      this.reset(); btn.textContent = '✓ Sent';
-    } else throw new Error();
+    if (json.success) { ok.style.display = 'block'; err.style.display = 'none'; this.reset(); btn.textContent = '✓ Sent'; }
+    else throw new Error();
   } catch {
     err.style.display = 'block'; ok.style.display = 'none';
     btn.disabled = false; btn.textContent = '→ Send Message';
